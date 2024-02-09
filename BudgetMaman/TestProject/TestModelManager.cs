@@ -55,7 +55,7 @@ namespace TestProject
 
             List<Depense> listDepense = new List<Depense>();
 
-            Mois mois = new Mois(listDepense, Mois.MoisEnum.Août, debutMois);
+            BudgetMaman.Model.Periode mois = new BudgetMaman.Model.Periode(listDepense, BudgetMaman.Model.Periode.MoisEnum.Août, debutMois);
 
             modelManager.addMois(mois);
 
@@ -73,7 +73,7 @@ namespace TestProject
 
             List<Depense> listDepense = new List<Depense>();
 
-            Mois mois = new Mois(listDepense, Mois.MoisEnum.Août, debutMois);
+            BudgetMaman.Model.Periode mois = new BudgetMaman.Model.Periode(listDepense, BudgetMaman.Model.Periode.MoisEnum.Août, debutMois);
 
             modelManager.addMois(mois);
 
@@ -92,11 +92,11 @@ namespace TestProject
         {
             ModelMain modelMain = new ModelMain();
 
-            Mois mois = new Mois(new List<Depense>(), Mois.MoisEnum.Janvier, new DateTime (DateTime.Now.Year, 1,1));
+            BudgetMaman.Model.Periode mois = new BudgetMaman.Model.Periode(new List<Depense>(), BudgetMaman.Model.Periode.MoisEnum.Janvier, new DateTime(DateTime.Now.Year, 1,1));
 
             modelMain.addMois(mois);
 
-            Mois? mois2 = modelMain.getCurrentMois();
+            BudgetMaman.Model.Periode? mois2 = modelMain.getCurrentMois();
 
             Assert.That(mois.MoisEnumerateur, Is.EqualTo(mois2.MoisEnumerateur));
             Assert.That(mois.Date, Is.EqualTo(mois2.Date));

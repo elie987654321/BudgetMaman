@@ -24,6 +24,13 @@ namespace BudgetMaman.Model
             pathMois = Directory.GetCurrentDirectory() + "/" + "mois.json";
         }
 
+        public void DeleteAll()
+        {
+            File.Delete(pathCategories);
+            File.Delete(pathNextIdCategorie);
+            File.Delete(pathMois);
+        }
+
         public void SaveCategories(Dictionary<int, Categorie> dictCategories)
         {
             string jsonString = JsonSerializer.Serialize(dictCategories);
@@ -31,9 +38,14 @@ namespace BudgetMaman.Model
             File.WriteAllText(pathCategories, jsonString);
         }
 
-        public void SaveMois(List<Mois> listMois)
+        public void SaveMois(List<Periode> listMois)
         {
             string jsonString = JsonSerializer.Serialize(listMois);
+
+            foreach (Periode mois in listMois)
+            {
+                List<Depense> listDepense = new List<Depense>();
+            }
 
             File.WriteAllText(pathMois, jsonString);
         }
@@ -63,25 +75,26 @@ namespace BudgetMaman.Model
         }
 
 
-        public List<Mois> LoadMois()
+        public List<Periode> LoadMois()
         {
-            List<Mois> listMois = new List<Mois>();
+            List<Periode> listMois = new List<Periode>();
 
             if (File.Exists(pathMois))
             {
                 string jsonString = File.ReadAllText(pathMois);
 
-                listMois = JsonSerializer.Deserialize<List<Mois>>(jsonString);
+                listMois = JsonSerializer.Deserialize<List<Periode>>(jsonString);
 
                 if (listMois == null)
                 {
-                    listMois = new List<Mois>();
+                    listMois = new List<Periode>();
                 }
             }
             else
             {
-                listMois = new List<Mois>();
+                listMois = new List<Periode>();
             }
+
             return listMois;
         }
 
@@ -105,11 +118,22 @@ namespace BudgetMaman.Model
             return id;
         }
 
-
         //Pour les tests
         public void resetIdNextCategorie()
         {
             File.Delete(pathNextIdCategorie);
-        } 
+        }
+
+        public void assignCategorieToDepense(Dictionary<int, Categorie> dictCategorie, List<Depense> listDepense)
+        {
+            foreach (Depense d in listDepense)
+            {
+                if (dictCategorie.ContainsKey(d.CategorieID))
+                {
+                    Categorie categorie = dictCategorie.GetValueOrDefault(d.CategorieID);
+                    d.setCategorieByRef(ref categorie); 
+                }
+            }
+        }
     }
 }

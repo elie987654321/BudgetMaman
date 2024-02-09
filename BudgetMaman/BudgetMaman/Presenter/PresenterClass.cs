@@ -33,12 +33,12 @@ namespace BudgetMaman.Presenter
             return dictCategorieView;
         }
 
-        public List<MoisView> getAllMois()
+        public List<View.ClassesView.PeriodeView> getAllMois()
         {
-            List<Mois> listMoisModel = modelMain.getAllMois();
-            List<MoisView> listMoisView = new List<MoisView>();
+            List<Model.Periode> listMoisModel = modelMain.getAllMois();
+            List<View.ClassesView.PeriodeView> listMoisView = new List<View.ClassesView.PeriodeView>();
 
-            foreach (Mois mModel in listMoisModel)
+            foreach (Model.Periode mModel in listMoisModel)
             {
 
                 List<DepenseView> listDepenseView = new List<DepenseView>();
@@ -47,14 +47,14 @@ namespace BudgetMaman.Presenter
                     DepenseView dView = depenseModelToView(dModel);
                 }
 
-                MoisView moisView = new MoisView(listDepenseView, enumMoisModelToView(mModel.MoisEnumerateur), mModel.Date); // Replace SomeOtherProperty with the actual properties of your Mois model
+                View.ClassesView.PeriodeView moisView = new View.ClassesView.PeriodeView(listDepenseView, enumMoisModelToView(mModel.MoisEnumerateur), mModel.Date); // Replace SomeOtherProperty with the actual properties of your Mois model
                 listMoisView.Add(moisView);
             }
 
             return listMoisView;
         }
 
-        public void addMois(MoisView moisView)
+        public void addMois(View.ClassesView.PeriodeView moisView)
         {
             List<Depense> listDepenseModel = new List<Depense>();
 
@@ -63,7 +63,8 @@ namespace BudgetMaman.Presenter
                 listDepenseModel.Add(depenseViewToModel(depenseView));
             }
 
-            Mois moisModel = new Mois(listDepenseModel, moisEnumViewToModel(moisView.MoisEnumerateur), moisView.Date);
+            Periode moisModel = new Periode(listDepenseModel, moisEnumViewToModel(moisView.MoisEnumerateur), moisView.Date);
+            modelMain.addMois(moisModel);
         }
 
         public void deleteCategorie(int idCategorie)
@@ -72,7 +73,7 @@ namespace BudgetMaman.Presenter
             modelMain.save();
         }
 
-        private MoisView MoisModelToView(Mois moisModel)
+        private View.ClassesView.PeriodeView MoisModelToView(Model.Periode moisModel)
         {
 
             List<DepenseView> listDepenseView = new List<DepenseView>();
@@ -82,126 +83,126 @@ namespace BudgetMaman.Presenter
                 listDepenseView.Add(depenseModelToView(depenseModel));
             }
 
-            MoisView moisView = new (listDepenseView, enumMoisModelToView(moisModel.MoisEnumerateur),moisModel.Date );
+            View.ClassesView.PeriodeView moisView = new (listDepenseView, enumMoisModelToView(moisModel.MoisEnumerateur), moisModel.Date );
             return moisView;
         }
 
         public DepenseView depenseModelToView(Depense dModel)
         {
-            DepenseView dView = new DepenseView(dModel.Nom, dModel.Message, dModel.Montant, dModel.Categorie, dModel.Date);
+            DepenseView dView = new DepenseView(dModel.Nom, dModel.Message, dModel.Montant, dModel.CategorieID, dModel.Date);
             return dView;
         }
 
-        private MoisView.MoisEnumView enumMoisModelToView(Mois.MoisEnum moisEnum)
+        private View.ClassesView.PeriodeView.MoisEnumView enumMoisModelToView(Model.Periode.MoisEnum moisEnum)
         {
-            MoisView.MoisEnumView moisEnumView;
+            View.ClassesView.PeriodeView.MoisEnumView moisEnumView;
 
             switch (moisEnum)
             {
-                case Mois.MoisEnum.Janvier:
-                    moisEnumView = MoisView.MoisEnumView.Janvier;
+                case Model.Periode.MoisEnum.Janvier:
+                    moisEnumView = View.ClassesView.PeriodeView.MoisEnumView.Janvier;
                     break;
-                case Mois.MoisEnum.Février:
-                    moisEnumView = MoisView.MoisEnumView.Fevrier;
+                case Model.Periode.MoisEnum.Février:
+                    moisEnumView = View.ClassesView.PeriodeView.MoisEnumView.Fevrier;
                     break;
-                case Mois.MoisEnum.Mars:
-                    moisEnumView = MoisView.MoisEnumView.Mars;
+                case Model.Periode.MoisEnum.Mars:
+                    moisEnumView = View.ClassesView.PeriodeView.MoisEnumView.Mars;
                     break;
-                case Mois.MoisEnum.Avril:
-                    moisEnumView = MoisView.MoisEnumView.Avril;
+                case Model.Periode.MoisEnum.Avril:
+                    moisEnumView = View.ClassesView.PeriodeView.MoisEnumView.Avril;
                     break;
-                case Mois.MoisEnum.Mai:
-                    moisEnumView = MoisView.MoisEnumView.Mai;
+                case Model.Periode.MoisEnum.Mai:
+                    moisEnumView = View.ClassesView.PeriodeView.MoisEnumView.Mai;
                     break;
-                case Mois.MoisEnum.Juin:
-                    moisEnumView = MoisView.MoisEnumView.Juin;
+                case Model.Periode.MoisEnum.Juin:
+                    moisEnumView = View.ClassesView.PeriodeView.MoisEnumView.Juin;
                     break;
-                case Mois.MoisEnum.Juillet:
-                    moisEnumView = MoisView.MoisEnumView.Juillet;
+                case Model.Periode.MoisEnum.Juillet:
+                    moisEnumView = View.ClassesView.PeriodeView.MoisEnumView.Juillet;
                     break;
-                case Mois.MoisEnum.Août:
-                    moisEnumView = MoisView.MoisEnumView.Août;
+                case Model.Periode.MoisEnum.Août:
+                    moisEnumView = View.ClassesView.PeriodeView.MoisEnumView.Août;
                     break;
-                case Mois.MoisEnum.Septembre:
-                    moisEnumView = MoisView.MoisEnumView.Septembre;
+                case Model.Periode.MoisEnum.Septembre:
+                    moisEnumView = View.ClassesView.PeriodeView.MoisEnumView.Septembre;
                     break;
-                case Mois.MoisEnum.Octobre:
-                    moisEnumView = MoisView.MoisEnumView.Octobre;
+                case Model.Periode.MoisEnum.Octobre:
+                    moisEnumView = View.ClassesView.PeriodeView.MoisEnumView.Octobre;
                     break;
-                case Mois.MoisEnum.Novembre:
-                    moisEnumView = MoisView.MoisEnumView.Novembre;
+                case Model.Periode.MoisEnum.Novembre:
+                    moisEnumView = View.ClassesView.PeriodeView.MoisEnumView.Novembre;
                     break;
-                case Mois.MoisEnum.Décembre:
+                case Model.Periode.MoisEnum.Décembre:
                 default:
-                    moisEnumView = MoisView.MoisEnumView.Décembre;
+                    moisEnumView = View.ClassesView.PeriodeView.MoisEnumView.Décembre;
                     break;
             }
 
             return moisEnumView;
         }
 
-        private Mois.MoisEnum moisEnumViewToModel(MoisView.MoisEnumView moisEnumView)
+        private Model.Periode.MoisEnum moisEnumViewToModel(View.ClassesView.PeriodeView.MoisEnumView moisEnumView)
         {
-            Mois.MoisEnum moisEnumModel;
+            Model.Periode.MoisEnum moisEnumModel;
 
             switch (moisEnumView)
             {
-                case MoisView.MoisEnumView.Janvier:
-                    moisEnumModel = Mois.MoisEnum.Janvier;
+                case View.ClassesView.PeriodeView.MoisEnumView.Janvier:
+                    moisEnumModel = Model.Periode.MoisEnum.Janvier;
                     break;
-                case MoisView.MoisEnumView.Fevrier:
-                    moisEnumModel = Mois.MoisEnum.Février;
+                case View.ClassesView.PeriodeView.MoisEnumView.Fevrier:
+                    moisEnumModel = Model.Periode.MoisEnum.Février;
                     break;
-                case MoisView.MoisEnumView.Mars:
-                    moisEnumModel = Mois.MoisEnum.Mars;
+                case View.ClassesView.PeriodeView.MoisEnumView.Mars:
+                    moisEnumModel = Model.Periode.MoisEnum.Mars;
                     break;
-                case MoisView.MoisEnumView.Avril:
-                    moisEnumModel = Mois.MoisEnum.Avril;
+                case View.ClassesView.PeriodeView.MoisEnumView.Avril:
+                    moisEnumModel = Model.Periode.MoisEnum.Avril;
                     break;
-                case MoisView.MoisEnumView.Mai:
-                    moisEnumModel = Mois.MoisEnum.Mai;
+                case View.ClassesView.PeriodeView.MoisEnumView.Mai:
+                    moisEnumModel = Model.Periode.MoisEnum.Mai;
                     break;
-                case MoisView.MoisEnumView.Juin:
-                    moisEnumModel = Mois.MoisEnum.Juin;
+                case View.ClassesView.PeriodeView.MoisEnumView.Juin:
+                    moisEnumModel = Model.Periode.MoisEnum.Juin;
                     break;
-                case MoisView.MoisEnumView.Juillet:
-                    moisEnumModel = Mois.MoisEnum.Juillet;
+                case View.ClassesView.PeriodeView.MoisEnumView.Juillet:
+                    moisEnumModel = Model.Periode.MoisEnum.Juillet;
                     break;
-                case MoisView.MoisEnumView.Août:
-                    moisEnumModel = Mois.MoisEnum.Août;
+                case View.ClassesView.PeriodeView.MoisEnumView.Août:
+                    moisEnumModel = Model.Periode.MoisEnum.Août;
                     break;
-                case MoisView.MoisEnumView.Septembre:
-                    moisEnumModel = Mois.MoisEnum.Septembre;
+                case View.ClassesView.PeriodeView.MoisEnumView.Septembre:
+                    moisEnumModel = Model.Periode.MoisEnum.Septembre;
                     break;
-                case MoisView.MoisEnumView.Octobre:
-                    moisEnumModel = Mois.MoisEnum.Octobre;
+                case View.ClassesView.PeriodeView.MoisEnumView.Octobre:
+                    moisEnumModel = Model.Periode.MoisEnum.Octobre;
                     break;
-                case MoisView.MoisEnumView.Novembre:
-                    moisEnumModel = Mois.MoisEnum.Novembre;
+                case View.ClassesView.PeriodeView.MoisEnumView.Novembre:
+                    moisEnumModel = Model.Periode.MoisEnum.Novembre;
                     break;
-                case MoisView.MoisEnumView.Décembre:
-                    moisEnumModel = Mois.MoisEnum.Décembre;
+                case View.ClassesView.PeriodeView.MoisEnumView.Décembre:
+                    moisEnumModel = Model.Periode.MoisEnum.Décembre;
                     break;
 
                 default:
-                    moisEnumModel = Mois.MoisEnum.Décembre;
+                    moisEnumModel = Model.Periode.MoisEnum.Décembre;
                     break;
             }
 
             return moisEnumModel;
         }
 
-        public void addCategorie(CategorieView categorieView)
+        public int addCategorie(CategorieView categorieView)
         {
             Categorie categorieModel = categoriesViewToModel(categorieView);
-            modelMain.addCategorie(categorieModel);
+            return modelMain.addCategorie(categorieModel);
         }
 
-        public MoisView getCurrentMois()
+        public PeriodeView getCurrentMois()
         {
-            Mois? moisModel = (modelMain.getCurrentMois());
+            Model.Periode? moisModel = (modelMain.getCurrentMois());
 
-            MoisView moisView = MoisModelToView(moisModel);
+            View.ClassesView.PeriodeView moisView = MoisModelToView(moisModel);
             return moisView;
         }
 

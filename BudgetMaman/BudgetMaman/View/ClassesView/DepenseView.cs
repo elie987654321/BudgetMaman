@@ -9,30 +9,27 @@ namespace BudgetMaman.View.ClassesView
     public class DepenseView
     {
 
-        private string nom;
+        private decimal montant;
 
-        private string message;
-
-        private Decimal montant;
-
-        private DateTime date;
-
-        private int categorie;
+        
 
 
-
-        public DepenseView(string nom, string message, Decimal montant, int categorie, DateTime date)
+        public DepenseView(string nom, string message, decimal montant, int categorie, DateTime date)
         {
-            this.nom = nom;
-            this.message = message;
-            this.montant = montant;
-            this.date = DateTime.Now;
-            this.categorie = categorie;
+            this.Nom = nom;
+            this.Message = message;
+            this.Montant = montant;
+            this.Date = DateTime.Now;
+            this.Categorie = categorie;
         }
 
         public string Nom { get; set; }
         public string Message { get; set; }
-        public decimal Montant { get; set; }
+        public decimal Montant 
+        {
+            get { return montant; }
+            set { montant = value; }
+        }
         public DateTime Date { get; set; }
         public int Categorie { get; set; }
     }

@@ -32,10 +32,10 @@ namespace BudgetMaman.View
             if (txtNom.Text != "" && nudBudgetCategorie.Value > 0)
             {
                 CategorieView categorieView = new CategorieView( txtNom.Text, nudBudgetCategorie.Value, nudBudgetCategorie.Value);
-                presenter.addCategorie(categorieView);
+                int idCategorie = presenter.addCategorie(categorieView);
                 presenter.save();
 
-                formPrincipal.addRow();
+                formPrincipal.addRow(idCategorie, categorieView);
             }
 
             this.Close();

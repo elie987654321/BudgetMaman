@@ -11,7 +11,7 @@ namespace BudgetMaman.Model
     {
         private Dictionary<int, Categorie> dictCategorie;
 
-        private List<Mois> listMois;
+        private List<Periode> listPeriode;
 
         private JsonManager jsonManager;
 
@@ -26,12 +26,12 @@ namespace BudgetMaman.Model
                 dictCategorie = new Dictionary<int, Categorie>();
             }
 
-            listMois = jsonManager.LoadMois();
+            listPeriode = jsonManager.LoadMois();
 
-            if (listMois == null)
+            if (listPeriode == null || listPeriode.Count == 0)
             {
-                listMois = new List<Mois>();
-                listMois.Add(new Mois(new List<Depense>(), (Mois.MoisEnum) DateTime.Now.Month, DateTime.Now));
+                listPeriode = new List<Periode>();
+                listPeriode.Add(new Periode(new List<Depense>(), (Periode.MoisEnum) DateTime.Now.Month, DateTime.Now));
             }
         }
 
@@ -40,16 +40,16 @@ namespace BudgetMaman.Model
             return dictCategorie;
         }
 
-        public List<Mois> getAllMois()
+        public List<Periode> getAllMois()
         {
-            return listMois;
+            return listPeriode;
         }
 
-        public Mois? getCurrentMois()
+        public Periode? getCurrentMois()
         {
-            if (listMois.Count > 0)
+            if (listPeriode.Count > 0)
             {
-                return listMois[listMois.Count - 1];
+                return listPeriode[listPeriode.Count - 1];
             }
             else
             {
@@ -70,22 +70,22 @@ namespace BudgetMaman.Model
 
         public void addDepense(Depense depense, int idCategorie)
         {
+            Periode mois = listPeriode[listPeriode.Count - 1];
 
-            if (listMois.Count > 0)
-            {
-                Mois mois = listMois[listMois.Count - 1];
+            mois.ListDepense.Add(depense);
 
-                mois.ListDepense.Add(depense);
-                
-                dictCategorie[idCategorie].CurrentMontant -= depense.Montant;
-
-                save();
-            }
+            dictCategorie[idCategorie].CurrentMontant -= depense.Montant;
+            save();
         }
 
-        public void addMois(Mois mois)
+        public void addMois(Periode mois)
         {
-            listMois.Add(mois);
+            listPeriode.Add(mois);
+            foreach(Categorie c in dictCategorie.Values)
+            {
+                c.resetCurrentMontant();
+            }
+            save();
         }
 
 
@@ -95,17 +95,25 @@ namespace BudgetMaman.Model
             save();
         }
 
+        public void resetMontantCategories()
+        {
+            foreach (Categorie c in dictCategorie.Values)
+            {
+                c.resetCurrentMontant();
+            }
+        }
+
         public void save()
         {
             jsonManager.SaveCategories(dictCategorie);
-            jsonManager.SaveMois(listMois);
+            jsonManager.SaveMois(listPeriode);
         }
 
         //Pour les tests
         public void resetListRam()
         {
             dictCategorie = new Dictionary<int, Categorie>();
-            listMois = new List<Mois>();
+            listPeriode = new List<Periode>();
         }
     }
 }

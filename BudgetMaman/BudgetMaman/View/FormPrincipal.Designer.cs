@@ -38,6 +38,7 @@
             label2 = new Label();
             label1 = new Label();
             txtNom = new TextBox();
+            lblErreur = new Label();
             btnAjouterCategories = new Button();
             btnSupprimerCategorie = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvCategories).BeginInit();
@@ -50,19 +51,19 @@
             dgvCategories.AllowUserToAddRows = false;
             dgvCategories.AllowUserToDeleteRows = false;
             dgvCategories.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvCategories.Location = new Point(400, 92);
+            dgvCategories.Location = new Point(400, 91);
             dgvCategories.Name = "dgvCategories";
             dgvCategories.RowHeadersWidth = 51;
             dgvCategories.RowTemplate.Height = 29;
             dgvCategories.Size = new Size(408, 330);
-            dgvCategories.TabIndex = 0;
+            dgvCategories.TabIndex = 9;
             // 
             // nUDDepense
             // 
             nUDDepense.Location = new Point(154, 54);
             nUDDepense.Name = "nUDDepense";
             nUDDepense.Size = new Size(91, 27);
-            nUDDepense.TabIndex = 1;
+            nUDDepense.TabIndex = 5;
             // 
             // btnNouveauMois
             // 
@@ -70,7 +71,7 @@
             btnNouveauMois.Name = "btnNouveauMois";
             btnNouveauMois.Size = new Size(196, 42);
             btnNouveauMois.TabIndex = 3;
-            btnNouveauMois.Text = "Nouveau mois";
+            btnNouveauMois.Text = "Nouvelle periode";
             btnNouveauMois.UseVisualStyleBackColor = true;
             btnNouveauMois.Click += btnNouveauMois_Click;
             // 
@@ -79,7 +80,7 @@
             btnAjouterDepense.Location = new Point(245, 163);
             btnAjouterDepense.Name = "btnAjouterDepense";
             btnAjouterDepense.Size = new Size(97, 40);
-            btnAjouterDepense.TabIndex = 4;
+            btnAjouterDepense.TabIndex = 8;
             btnAjouterDepense.Text = "Ajouter";
             btnAjouterDepense.UseVisualStyleBackColor = true;
             btnAjouterDepense.Click += btnAjouterDepense_Click;
@@ -105,7 +106,7 @@
             rTxtMessage.Location = new Point(18, 133);
             rTxtMessage.Name = "rTxtMessage";
             rTxtMessage.Size = new Size(206, 92);
-            rTxtMessage.TabIndex = 13;
+            rTxtMessage.TabIndex = 6;
             rTxtMessage.Text = "";
             // 
             // label3
@@ -140,14 +141,23 @@
             txtNom.Location = new Point(18, 53);
             txtNom.Name = "txtNom";
             txtNom.Size = new Size(125, 27);
-            txtNom.TabIndex = 9;
+            txtNom.TabIndex = 4;
+            // 
+            // lblErreur
+            // 
+            lblErreur.AutoSize = true;
+            lblErreur.ForeColor = Color.Crimson;
+            lblErreur.Location = new Point(400, 439);
+            lblErreur.Name = "lblErreur";
+            lblErreur.Size = new Size(0, 20);
+            lblErreur.TabIndex = 14;
             // 
             // btnAjouterCategories
             // 
             btnAjouterCategories.Location = new Point(91, 68);
             btnAjouterCategories.Name = "btnAjouterCategories";
             btnAjouterCategories.Size = new Size(196, 44);
-            btnAjouterCategories.TabIndex = 7;
+            btnAjouterCategories.TabIndex = 1;
             btnAjouterCategories.Text = "Ajouter une categorie";
             btnAjouterCategories.UseVisualStyleBackColor = true;
             btnAjouterCategories.Click += btnAjouterCategories_Click;
@@ -157,7 +167,7 @@
             btnSupprimerCategorie.Location = new Point(91, 118);
             btnSupprimerCategorie.Name = "btnSupprimerCategorie";
             btnSupprimerCategorie.Size = new Size(196, 44);
-            btnSupprimerCategorie.TabIndex = 8;
+            btnSupprimerCategorie.TabIndex = 2;
             btnSupprimerCategorie.Text = "Supprimer une categorie";
             btnSupprimerCategorie.UseVisualStyleBackColor = true;
             btnSupprimerCategorie.Click += btnSupprimerCategorie_Click;
@@ -167,6 +177,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(971, 537);
+            Controls.Add(lblErreur);
             Controls.Add(btnSupprimerCategorie);
             Controls.Add(btnAjouterCategories);
             Controls.Add(btnNouveauMois);
@@ -179,6 +190,7 @@
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -195,5 +207,6 @@
         private Label label1;
         private Label label3;
         private RichTextBox rTxtMessage;
+        private Label lblErreur;
     }
 }

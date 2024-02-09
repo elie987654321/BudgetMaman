@@ -4,11 +4,11 @@ namespace BudgetMaman.View.InterfaceView
 {
     public interface IPresenterClass
     {
-        public void addCategorie(CategorieView categorieView);
+        public int addCategorie(CategorieView categorieView);
         public void addDepense(int idCategorie, DepenseView depenseView);
-        public void addMois(MoisView moisView);
+        public void addMois(PeriodeView moisView);
         public Dictionary<int, CategorieView> getAllCategories();
-        public List<MoisView> getAllMois();
+        public List<PeriodeView> getAllMois();
         public void resetListRam();
         public void save();
 
