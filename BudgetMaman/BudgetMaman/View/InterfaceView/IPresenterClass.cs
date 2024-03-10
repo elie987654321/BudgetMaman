@@ -1,4 +1,5 @@
-﻿using BudgetMaman.View.ClassesView;
+﻿using BudgetMaman.Model;
+using BudgetMaman.View.ClassesView;
 
 namespace BudgetMaman.View.InterfaceView
 {
@@ -6,10 +7,14 @@ namespace BudgetMaman.View.InterfaceView
     {
         public int addCategorie(CategorieView categorieView);
         public void addDepense(int idCategorie, DepenseView depenseView);
-        public void addMois(PeriodeView moisView);
+        public void addPeriode(PeriodeView moisView);
         public Dictionary<int, CategorieView> getAllCategories();
         public List<PeriodeView> getAllMois();
         public void resetListRam();
+
+        public void modifierCategorie(int idCategorie, CategorieView categorieView);
+
+        public PeriodeView? getCurrentPeriode();
         public void save();
 
         public void deleteCategorie(int idCategorie);

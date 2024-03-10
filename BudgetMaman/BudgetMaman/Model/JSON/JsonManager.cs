@@ -12,7 +12,7 @@ namespace BudgetMaman.Model
     public class JsonManager
     {
         private string pathCategories;
-        private string pathMois;
+        private string pathPeriode;
         private string pathNextIdCategorie;
 
         public JsonManager()
@@ -21,14 +21,14 @@ namespace BudgetMaman.Model
 
             pathNextIdCategorie = Directory.GetCurrentDirectory() + "/" + "nextIDCategorie.txt";
 
-            pathMois = Directory.GetCurrentDirectory() + "/" + "mois.json";
+            pathPeriode = Directory.GetCurrentDirectory() + "/" + "periode.json";
         }
 
         public void DeleteAll()
         {
             File.Delete(pathCategories);
             File.Delete(pathNextIdCategorie);
-            File.Delete(pathMois);
+            File.Delete(pathPeriode);
         }
 
         public void SaveCategories(Dictionary<int, Categorie> dictCategories)
@@ -38,16 +38,16 @@ namespace BudgetMaman.Model
             File.WriteAllText(pathCategories, jsonString);
         }
 
-        public void SaveMois(List<Periode> listMois)
+        public void SavePeriode(List<Periode> listPeriode)
         {
-            string jsonString = JsonSerializer.Serialize(listMois);
+            string jsonString = JsonSerializer.Serialize(listPeriode);
 
-            foreach (Periode mois in listMois)
+            foreach (Periode mois in listPeriode)
             {
                 List<Depense> listDepense = new List<Depense>();
             }
 
-            File.WriteAllText(pathMois, jsonString);
+            File.WriteAllText(pathPeriode, jsonString);
         }
 
 
@@ -75,13 +75,13 @@ namespace BudgetMaman.Model
         }
 
 
-        public List<Periode> LoadMois()
+        public List<Periode> LoadPeriode()
         {
             List<Periode> listMois = new List<Periode>();
 
-            if (File.Exists(pathMois))
+            if (File.Exists(pathPeriode))
             {
-                string jsonString = File.ReadAllText(pathMois);
+                string jsonString = File.ReadAllText(pathPeriode);
 
                 listMois = JsonSerializer.Deserialize<List<Periode>>(jsonString);
 

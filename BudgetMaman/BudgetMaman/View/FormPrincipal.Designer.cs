@@ -41,6 +41,8 @@
             lblErreur = new Label();
             btnAjouterCategories = new Button();
             btnSupprimerCategorie = new Button();
+            btnModifierCategorie = new Button();
+            lblDebutPeriode = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvCategories).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nUDDepense).BeginInit();
             groupBox1.SuspendLayout();
@@ -51,7 +53,7 @@
             dgvCategories.AllowUserToAddRows = false;
             dgvCategories.AllowUserToDeleteRows = false;
             dgvCategories.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvCategories.Location = new Point(400, 91);
+            dgvCategories.Location = new Point(455, 99);
             dgvCategories.Name = "dgvCategories";
             dgvCategories.RowHeadersWidth = 51;
             dgvCategories.RowTemplate.Height = 29;
@@ -61,6 +63,7 @@
             // nUDDepense
             // 
             nUDDepense.Location = new Point(154, 54);
+            nUDDepense.Maximum = new decimal(new int[] { 200000, 0, 0, 0 });
             nUDDepense.Name = "nUDDepense";
             nUDDepense.Size = new Size(91, 27);
             nUDDepense.TabIndex = 5;
@@ -77,7 +80,7 @@
             // 
             // btnAjouterDepense
             // 
-            btnAjouterDepense.Location = new Point(245, 163);
+            btnAjouterDepense.Location = new Point(246, 133);
             btnAjouterDepense.Name = "btnAjouterDepense";
             btnAjouterDepense.Size = new Size(97, 40);
             btnAjouterDepense.TabIndex = 8;
@@ -154,7 +157,7 @@
             // 
             // btnAjouterCategories
             // 
-            btnAjouterCategories.Location = new Point(91, 68);
+            btnAjouterCategories.Location = new Point(91, 30);
             btnAjouterCategories.Name = "btnAjouterCategories";
             btnAjouterCategories.Size = new Size(196, 44);
             btnAjouterCategories.TabIndex = 1;
@@ -164,7 +167,7 @@
             // 
             // btnSupprimerCategorie
             // 
-            btnSupprimerCategorie.Location = new Point(91, 118);
+            btnSupprimerCategorie.Location = new Point(91, 80);
             btnSupprimerCategorie.Name = "btnSupprimerCategorie";
             btnSupprimerCategorie.Size = new Size(196, 44);
             btnSupprimerCategorie.TabIndex = 2;
@@ -172,11 +175,31 @@
             btnSupprimerCategorie.UseVisualStyleBackColor = true;
             btnSupprimerCategorie.Click += btnSupprimerCategorie_Click;
             // 
+            // btnModifierCategorie
+            // 
+            btnModifierCategorie.Location = new Point(91, 130);
+            btnModifierCategorie.Name = "btnModifierCategorie";
+            btnModifierCategorie.Size = new Size(196, 44);
+            btnModifierCategorie.TabIndex = 15;
+            btnModifierCategorie.Text = "Modifier une categorie";
+            btnModifierCategorie.UseVisualStyleBackColor = true;
+            btnModifierCategorie.Click += btnModifierCategorie_Click;
+            // 
+            // lblDebutPeriode
+            // 
+            lblDebutPeriode.AutoSize = true;
+            lblDebutPeriode.Location = new Point(455, 54);
+            lblDebutPeriode.Name = "lblDebutPeriode";
+            lblDebutPeriode.Size = new Size(0, 20);
+            lblDebutPeriode.TabIndex = 16;
+            // 
             // FormPrincipal
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(971, 537);
+            Controls.Add(lblDebutPeriode);
+            Controls.Add(btnModifierCategorie);
             Controls.Add(lblErreur);
             Controls.Add(btnSupprimerCategorie);
             Controls.Add(btnAjouterCategories);
@@ -208,5 +231,7 @@
         private Label label3;
         private RichTextBox rTxtMessage;
         private Label lblErreur;
+        private Button btnModifierCategorie;
+        private Label lblDebutPeriode;
     }
 }

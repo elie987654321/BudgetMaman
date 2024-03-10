@@ -1,6 +1,7 @@
 using BudgetMaman.View;
 using BudgetMaman.View.ClassesView;
 using BudgetMaman.View.InterfaceView;
+using System.ComponentModel;
 
 namespace BudgetMaman
 {
@@ -8,19 +9,48 @@ namespace BudgetMaman
     {
         private IPresenterClass presenter;
 
+        private int indiceColonneNom = 0;
+        private int indiceColonneBudget = 1;
+        private int indiceColonneMontantDepenser = 2;
+        private int indiceColonneMontantRestant = 3;
+        private int indiceColonneCacheIdCategorie = 4;
+
         public FormPrincipal(IPresenterClass presenter)
         {
             InitializeComponent();
             this.presenter = presenter;
 
+            setLabelDebutPeriode();
             fillDgvCategories();
+            sortDgvCategorie();
         }
+
+        public void sortDgvCategorie()
+        {
+            DataGridViewColumn colonne = dgvCategories.Columns[indiceColonneNom];
+            dgvCategories.Sort(colonne, System.ComponentModel.ListSortDirection.Ascending);
+        }
+
+        public void setLabelDebutPeriode()
+        {
+            PeriodeView? periode = presenter.getCurrentPeriode();
+            if (periode != null)
+            {
+                int jour = periode.Date.Day;
+                string mois = periode.MoisEnumerateur.ToString();
+                int annee = periode.Date.Year;
+
+                string dateFormatee = $"Debut de la periode : {jour} {mois} {annee}";
+                lblDebutPeriode.Text = dateFormatee;
+            }
+        }
+
 
         public void fillDgvCategories()
         {
             dgvCategories.Rows.Clear();
 
-            dgvCategories.ColumnCount = 3;
+            dgvCategories.ColumnCount = 5;
 
             Dictionary<int, CategorieView> dictCategories = presenter.getAllCategories();
 
@@ -29,8 +59,14 @@ namespace BudgetMaman
                 addRow(c.Key, c.Value);
             }
 
-            dgvCategories.Columns[2].Visible = false;
-            dgvCategories.Columns[2].Width = 0;
+            dgvCategories.Columns[indiceColonneCacheIdCategorie].Visible = false;
+            dgvCategories.Columns[indiceColonneCacheIdCategorie].Width = 0;
+
+            dgvCategories.Columns[indiceColonneNom].HeaderText = "Nom";
+            dgvCategories.Columns[indiceColonneBudget].HeaderText = "Budget";
+            dgvCategories.Columns[indiceColonneMontantDepenser].HeaderText = "Montant dépenser";
+            dgvCategories.Columns[indiceColonneMontantRestant].HeaderText = "Montant restant";
+
 
             dgvCategories.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvCategories.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -46,6 +82,7 @@ namespace BudgetMaman
             {
                 addRow(c.Key, c.Value);
             }
+            sortDgvCategorie();
         }
 
         private void btnAjouterCategories_Click(object sender, EventArgs e)
@@ -56,23 +93,24 @@ namespace BudgetMaman
 
         private void btnNouveauMois_Click(object sender, EventArgs e)
         {
-            PeriodeView mois = new PeriodeView(new List<DepenseView>(), (PeriodeView.MoisEnumView)(DateTime.Now.Month), DateTime.Now);
+            PeriodeView mois = new PeriodeView(new List<DepenseView>(), (PeriodeView.MoisEnumView)(DateTime.Now.Month - 1), DateTime.Now);
 
             List<DepenseView> listDepenseView = new List<DepenseView>();
 
             mois.ListDepense = listDepenseView;
 
-            presenter.addMois(mois);
+            presenter.addPeriode(mois);
 
             resetDatagridView();
             fillDgvCategories();
+            setLabelDebutPeriode();
         }
 
         private void btnSupprimerCategorie_Click(object sender, EventArgs e)
         {
             if (dgvCategories.SelectedRows.Count == 1)
             {
-                int idCategorieASupprimer = int.Parse(dgvCategories.SelectedCells[2].Value.ToString());
+                int idCategorieASupprimer = int.Parse(dgvCategories.SelectedCells[indiceColonneCacheIdCategorie].Value.ToString());
 
                 presenter.deleteCategorie(idCategorieASupprimer);
                 dgvCategories.Rows.RemoveAt(dgvCategories.SelectedRows[0].Index);
@@ -81,17 +119,16 @@ namespace BudgetMaman
 
         private void btnAjouterDepense_Click(object sender, EventArgs e)
         {
-            if (dgvCategories.SelectedRows.Count == 1 && txtNom.Text != ""  && nUDDepense.Value > 0)
+            if (dgvCategories.SelectedRows.Count == 1 && txtNom.Text != "" && nUDDepense.Value > 0)
             {
-                int idCategorie = int.Parse(dgvCategories.SelectedRows[0].Cells[2].Value.ToString());
+                int idCategorie = int.Parse(dgvCategories.SelectedRows[0].Cells[indiceColonneCacheIdCategorie].Value.ToString());
 
                 DepenseView depense = new DepenseView(txtNom.Text, rTxtMessage.Text, nUDDepense.Value,
                         idCategorie, DateTime.Now);
 
                 presenter.addDepense(idCategorie, depense);
 
-                MessageBox.Show("Depense ajouté");
-
+                
                 setRowCategorieCurrentMontant(idCategorie, int.Parse(nUDDepense.Value.ToString()));
                 lblErreur.Text = "";
             }
@@ -107,9 +144,14 @@ namespace BudgetMaman
 
         public void addRow(int idCategorie, CategorieView categorie)
         {
+
+            /*TODO faire fonctionner ça avec les montants dans les variables*/
+
             String[] rowData =
                 {
                     categorie.Nom,
+                    categorie.MontantDebut.ToString(),
+                    (categorie.MontantDebut - categorie.CurrentMontant).ToString(),
                     categorie.CurrentMontant.ToString(),
                     idCategorie.ToString()
                 };
@@ -122,18 +164,29 @@ namespace BudgetMaman
             int i = 0;
             bool trouve = false;
 
-            DataGridViewCell cellAChanger;
+            DataGridViewCell cellMontantBudget;
+            DataGridViewCell cellMontantRestant;
+            DataGridViewCell cellMontantDepense;            
 
             while (i < dgvCategories.RowCount && !trouve)
             {
-                int idCategorieRow = int.Parse(dgvCategories.Rows[i].Cells[2].Value.ToString());
+                int idCategorieRow = int.Parse(dgvCategories.Rows[i].Cells[indiceColonneCacheIdCategorie].Value.ToString());
 
                 if (idCategorie == idCategorieRow)
                 {
                     trouve = true;
-                    cellAChanger = dgvCategories.Rows[i].Cells[1];
-                    int currentValeurCell = int.Parse(cellAChanger.Value.ToString());
-                    cellAChanger.Value = currentValeurCell - montantASoustraire;
+
+                    cellMontantBudget = dgvCategories.Rows[i].Cells[indiceColonneBudget]; 
+                    cellMontantDepense = dgvCategories.Rows[i].Cells[indiceColonneMontantDepenser];
+                    cellMontantRestant = dgvCategories.Rows[i].Cells[indiceColonneMontantRestant];
+
+                    int currentValeurMontantRestant = int.Parse(cellMontantRestant.Value.ToString()) - montantASoustraire;
+                    cellMontantRestant.Value = currentValeurMontantRestant ;
+
+                    
+                    int valeurBudget = int.Parse(cellMontantBudget.Value.ToString());
+                    cellMontantDepense.Value = valeurBudget - currentValeurMontantRestant; 
+
                 }
                 else
                 {
@@ -141,5 +194,30 @@ namespace BudgetMaman
                 }
             };
         }
+
+        private void btnModifierCategorie_Click(object sender, EventArgs e)
+        {
+            int idCategorieAModifier = int.Parse(dgvCategories.SelectedRows[0].Cells[indiceColonneCacheIdCategorie].Value.ToString());
+            
+            Dictionary<int, CategorieView> dictCategorie = presenter.getAllCategories();
+
+            CategorieView categorie = dictCategorie[idCategorieAModifier];
+
+
+            //TODO logger l'exception du catch quand le logger sera pret
+            FormModifierCategorie formModif = new FormModifierCategorie(idCategorieAModifier, categorie, this, presenter);
+            this.Enabled = false;
+            formModif.Show();
+        }
+
+        public void modifierRowCategorie(CategorieView categorie)
+        {
+            DataGridViewRow rowAModifier = dgvCategories.SelectedRows[0];
+            rowAModifier.Cells[indiceColonneNom].Value = categorie.Nom;
+            rowAModifier.Cells[indiceColonneBudget].Value = categorie.MontantDebut;
+            rowAModifier.Cells[indiceColonneMontantRestant].Value = categorie.CurrentMontant;
+
+            dgvCategories.Sort(dgvCategories.Columns[indiceColonneNom], System.ComponentModel.ListSortDirection.Ascending);
+        }   
     }
 }

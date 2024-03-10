@@ -1,1 +1,1 @@
-{"1":{"Nom":"categorie1","MontantDebut":2,"CurrentMontant":3},"2":{"Nom":"categorie2","MontantDebut":5,"CurrentMontant":6}}
+{"1":{"Nom":"categorie1","MontantDebut":2,"CurrentMontant":3,"Desactiver":false},"2":{"Nom":"categorie2","MontantDebut":5,"CurrentMontant":6,"Desactiver":false}}

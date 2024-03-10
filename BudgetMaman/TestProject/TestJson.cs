@@ -66,12 +66,12 @@ namespace TestProject
             listPeriode.Add(mois2);
 
 
-            jsonManager.SaveMois(listPeriode);
+            jsonManager.SavePeriode(listPeriode);
 
 
 
 
-            List<Periode> listMoisLecture = jsonManager.LoadMois();
+            List<Periode> listMoisLecture = jsonManager.LoadPeriode();
 
             Assert.That(listPeriode[0].Date, Is.EqualTo(listMoisLecture[0].Date));
             Assert.That(listPeriode[0].MoisEnumerateur, Is.EqualTo(listMoisLecture[0].MoisEnumerateur));

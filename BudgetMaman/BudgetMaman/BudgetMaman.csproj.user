@@ -7,6 +7,9 @@
     <Compile Update="View\FormAjouterCategorie.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="View\FormModifierCategorie.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="View\FormPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -57,9 +57,9 @@ namespace TestProject
 
             BudgetMaman.Model.Periode mois = new BudgetMaman.Model.Periode(listDepense, BudgetMaman.Model.Periode.MoisEnum.Août, debutMois);
 
-            modelManager.addMois(mois);
+            modelManager.addPeriode(mois);
 
-            Assert.That(modelManager.getAllMois().Count, Is.EqualTo(1));
+            Assert.That(modelManager.getAllPeriodes().Count, Is.EqualTo(1));
         }
 
         [Test]
@@ -75,7 +75,7 @@ namespace TestProject
 
             BudgetMaman.Model.Periode mois = new BudgetMaman.Model.Periode(listDepense, BudgetMaman.Model.Periode.MoisEnum.Août, debutMois);
 
-            modelManager.addMois(mois);
+            modelManager.addPeriode(mois);
 
             Categorie categorie = new Categorie("testCategorie", 100, 100);
             modelManager.addCategorie(categorie);
@@ -94,9 +94,9 @@ namespace TestProject
 
             BudgetMaman.Model.Periode mois = new BudgetMaman.Model.Periode(new List<Depense>(), BudgetMaman.Model.Periode.MoisEnum.Janvier, new DateTime(DateTime.Now.Year, 1,1));
 
-            modelMain.addMois(mois);
+            modelMain.addPeriode(mois);
 
-            BudgetMaman.Model.Periode? mois2 = modelMain.getCurrentMois();
+            BudgetMaman.Model.Periode? mois2 = modelMain.getCurrentPeriode();
 
             Assert.That(mois.MoisEnumerateur, Is.EqualTo(mois2.MoisEnumerateur));
             Assert.That(mois.Date, Is.EqualTo(mois2.Date));

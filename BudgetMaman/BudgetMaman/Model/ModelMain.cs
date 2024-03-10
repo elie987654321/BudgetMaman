@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BudgetMaman.Model;
+using BudgetMaman.View.ClassesView;
 
 namespace BudgetMaman.Model
 {
@@ -26,7 +28,7 @@ namespace BudgetMaman.Model
                 dictCategorie = new Dictionary<int, Categorie>();
             }
 
-            listPeriode = jsonManager.LoadMois();
+            listPeriode = jsonManager.LoadPeriode();
 
             if (listPeriode == null || listPeriode.Count == 0)
             {
@@ -40,12 +42,12 @@ namespace BudgetMaman.Model
             return dictCategorie;
         }
 
-        public List<Periode> getAllMois()
+        public List<Periode> getAllPeriodes()
         {
             return listPeriode;
         }
 
-        public Periode? getCurrentMois()
+        public Periode? getCurrentPeriode()
         {
             if (listPeriode.Count > 0)
             {
@@ -78,14 +80,27 @@ namespace BudgetMaman.Model
             save();
         }
 
-        public void addMois(Periode mois)
+        public void addPeriode(Periode periode)
         {
-            listPeriode.Add(mois);
+            listPeriode.Add(periode);
             foreach(Categorie c in dictCategorie.Values)
             {
                 c.resetCurrentMontant();
             }
             save();
+        }
+
+        public void modifierCategorie(int idCategorie, Categorie categorie)
+        {
+            if (dictCategorie.ContainsKey(idCategorie))
+            { 
+                dictCategorie[idCategorie] = categorie;
+                save();
+            }
+            else
+            {
+                Console.WriteLine("Erreur lors de la modification de la categorie");
+            }
         }
 
 
@@ -106,7 +121,7 @@ namespace BudgetMaman.Model
         public void save()
         {
             jsonManager.SaveCategories(dictCategorie);
-            jsonManager.SaveMois(listPeriode);
+            jsonManager.SavePeriode(listPeriode);
         }
 
         //Pour les tests

@@ -12,6 +12,7 @@ namespace BudgetMaman.Model
         public Decimal MontantDebut { get ; set ; }
         public Decimal CurrentMontant { get ; set ; }
 
+        public bool Desactiver { get; set; }
 
         public Categorie(string nom, Decimal montantDebut, Decimal currentMontant)
         {

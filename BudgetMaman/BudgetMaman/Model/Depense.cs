@@ -37,8 +37,6 @@ namespace BudgetMaman.Model
         public DateTime Date { get; set; }
         public int CategorieID { get; set; }
 
-        public Categorie Categorie { get  => categorie;}
-
         public void setCategorieByRef(ref Categorie? categorie)
         {
             this.categorie = categorie;
