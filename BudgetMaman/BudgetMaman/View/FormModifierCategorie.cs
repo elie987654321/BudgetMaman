@@ -29,7 +29,7 @@ namespace BudgetMaman.View
             this.idCategorie = idCategorie;
             txtNom.Text = categorieView.Nom;
             nudBudgetCategorie.Value = categorieView.MontantDebut;
-            montantDepenser = categorieView.MontantDebut  - categorieView.CurrentMontant;
+            montantDepenser = categorieView.MontantDebut - categorieView.CurrentMontant;
         }
 
 
@@ -38,13 +38,24 @@ namespace BudgetMaman.View
             if (txtNom.Text != "" && nudBudgetCategorie.Value > 0)
             {
                 CategorieView categorieView = new CategorieView(txtNom.Text, nudBudgetCategorie.Value, nudBudgetCategorie.Value - montantDepenser);
-                presenter.modifierCategorie(idCategorie ,categorieView);
+                presenter.modifierCategorie(idCategorie, categorieView);
                 presenter.save();
 
                 formPrincipal.modifierRowCategorie(categorieView);
                 formPrincipal.Enabled = true;
                 this.Close();
             }
+        }
+
+
+        private void FormModifierCategorie_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            formPrincipal.Enabled = true;
+        }
+
+        private void btnAnnuler_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

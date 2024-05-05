@@ -60,6 +60,7 @@
             btnAnnuler.TabIndex = 9;
             btnAnnuler.Text = "Annuler";
             btnAnnuler.UseVisualStyleBackColor = true;
+            btnAnnuler.Click += btnAnnuler_Click;
             // 
             // btnModifierCategorie
             // 
@@ -102,6 +103,7 @@
             Controls.Add(lblNom);
             Name = "FormModifierCategorie";
             Text = "FormModifierCategorie";
+            FormClosing += FormModifierCategorie_FormClosing;
             ((System.ComponentModel.ISupportInitialize)nudBudgetCategorie).EndInit();
             ResumeLayout(false);
             PerformLayout();

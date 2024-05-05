@@ -37,7 +37,6 @@ namespace TestProject
             Assert.That(categorie2Lecture.Nom, Is.EqualTo(categorie2.Nom));
             Assert.That(categorie2Lecture.MontantDebut, Is.EqualTo(categorie2.MontantDebut));
             Assert.That(categorie2Lecture.CurrentMontant, Is.EqualTo(categorie2.CurrentMontant));
-
         }
 
         [Test]

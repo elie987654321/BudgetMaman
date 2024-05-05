@@ -42,10 +42,6 @@ namespace BudgetMaman.Model
         {
             string jsonString = JsonSerializer.Serialize(listPeriode);
 
-            foreach (Periode mois in listPeriode)
-            {
-                List<Depense> listDepense = new List<Depense>();
-            }
 
             File.WriteAllText(pathPeriode, jsonString);
         }

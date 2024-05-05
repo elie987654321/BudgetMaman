@@ -14,6 +14,8 @@ namespace BudgetMaman.View.InterfaceView
 
         public void modifierCategorie(int idCategorie, CategorieView categorieView);
 
+        public void ModifierDerniereDepense(decimal montant, int idCategorie);
+
         public PeriodeView? getCurrentPeriode();
         public void save();
 

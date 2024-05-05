@@ -80,6 +80,29 @@ namespace BudgetMaman.Model
             save();
         }
 
+        public void modifierDerniereDepense(decimal montant, int idCategorie)
+        {
+            if (listPeriode.Count > 0)
+            {
+                Periode lastPeriode = listPeriode.Last();
+                if (lastPeriode.ListDepense.Count > 0)
+                {
+
+                    dictCategorie[idCategorie].CurrentMontant += lastPeriode.ListDepense.Last().Montant;
+
+                    Depense lastDepense = lastPeriode.ListDepense.Last();
+                    lastDepense.Montant = montant;
+
+                    dictCategorie[idCategorie].CurrentMontant -= montant;
+
+                    save();
+                }
+
+
+            }
+        } 
+         
+
         public void addPeriode(Periode periode)
         {
             listPeriode.Add(periode);

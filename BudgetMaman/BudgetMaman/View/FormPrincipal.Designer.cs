@@ -57,12 +57,13 @@
             dgvCategories.Name = "dgvCategories";
             dgvCategories.RowHeadersWidth = 51;
             dgvCategories.RowTemplate.Height = 29;
-            dgvCategories.Size = new Size(408, 330);
+            dgvCategories.Size = new Size(408, 331);
             dgvCategories.TabIndex = 9;
+            dgvCategories.CellEndEdit += dgvCategories_CellEndEdit;
             // 
             // nUDDepense
             // 
-            nUDDepense.Location = new Point(154, 54);
+            nUDDepense.Location = new Point(154, 53);
             nUDDepense.Maximum = new decimal(new int[] { 200000, 0, 0, 0 });
             nUDDepense.Name = "nUDDepense";
             nUDDepense.Size = new Size(91, 27);
@@ -70,9 +71,9 @@
             // 
             // btnNouveauMois
             // 
-            btnNouveauMois.Location = new Point(91, 218);
+            btnNouveauMois.Location = new Point(91, 219);
             btnNouveauMois.Name = "btnNouveauMois";
-            btnNouveauMois.Size = new Size(196, 42);
+            btnNouveauMois.Size = new Size(197, 43);
             btnNouveauMois.TabIndex = 3;
             btnNouveauMois.Text = "Nouvelle periode";
             btnNouveauMois.UseVisualStyleBackColor = true;
@@ -97,9 +98,9 @@
             groupBox1.Controls.Add(txtNom);
             groupBox1.Controls.Add(nUDDepense);
             groupBox1.Controls.Add(btnAjouterDepense);
-            groupBox1.Location = new Point(12, 266);
+            groupBox1.Location = new Point(11, 267);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(364, 259);
+            groupBox1.Size = new Size(363, 259);
             groupBox1.TabIndex = 6;
             groupBox1.TabStop = false;
             groupBox1.Text = "Ajouter une depense";
@@ -115,7 +116,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(154, 30);
+            label3.Location = new Point(154, 29);
             label3.Name = "label3";
             label3.Size = new Size(65, 20);
             label3.TabIndex = 12;
@@ -124,7 +125,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(18, 98);
+            label2.Location = new Point(18, 99);
             label2.Name = "label2";
             label2.Size = new Size(67, 20);
             label2.TabIndex = 11;
@@ -133,7 +134,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(18, 30);
+            label1.Location = new Point(18, 29);
             label1.Name = "label1";
             label1.Size = new Size(42, 20);
             label1.TabIndex = 10;
@@ -157,9 +158,9 @@
             // 
             // btnAjouterCategories
             // 
-            btnAjouterCategories.Location = new Point(91, 30);
+            btnAjouterCategories.Location = new Point(91, 29);
             btnAjouterCategories.Name = "btnAjouterCategories";
-            btnAjouterCategories.Size = new Size(196, 44);
+            btnAjouterCategories.Size = new Size(197, 44);
             btnAjouterCategories.TabIndex = 1;
             btnAjouterCategories.Text = "Ajouter une categorie";
             btnAjouterCategories.UseVisualStyleBackColor = true;
@@ -169,7 +170,7 @@
             // 
             btnSupprimerCategorie.Location = new Point(91, 80);
             btnSupprimerCategorie.Name = "btnSupprimerCategorie";
-            btnSupprimerCategorie.Size = new Size(196, 44);
+            btnSupprimerCategorie.Size = new Size(197, 44);
             btnSupprimerCategorie.TabIndex = 2;
             btnSupprimerCategorie.Text = "Supprimer une categorie";
             btnSupprimerCategorie.UseVisualStyleBackColor = true;
@@ -177,9 +178,9 @@
             // 
             // btnModifierCategorie
             // 
-            btnModifierCategorie.Location = new Point(91, 130);
+            btnModifierCategorie.Location = new Point(91, 131);
             btnModifierCategorie.Name = "btnModifierCategorie";
-            btnModifierCategorie.Size = new Size(196, 44);
+            btnModifierCategorie.Size = new Size(197, 44);
             btnModifierCategorie.TabIndex = 15;
             btnModifierCategorie.Text = "Modifier une categorie";
             btnModifierCategorie.UseVisualStyleBackColor = true;
@@ -188,7 +189,7 @@
             // lblDebutPeriode
             // 
             lblDebutPeriode.AutoSize = true;
-            lblDebutPeriode.Location = new Point(455, 54);
+            lblDebutPeriode.Location = new Point(455, 53);
             lblDebutPeriode.Name = "lblDebutPeriode";
             lblDebutPeriode.Size = new Size(0, 20);
             lblDebutPeriode.TabIndex = 16;

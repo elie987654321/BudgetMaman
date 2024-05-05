@@ -238,6 +238,11 @@ namespace BudgetMaman.Presenter
             return categorieView;
         }
 
+        public void ModifierDerniereDepense(decimal montant, int idCategorie)
+        {
+            modelMain.modifierDerniereDepense(montant, idCategorie);
+        }
+
         
 
         public void save()

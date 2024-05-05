@@ -103,6 +103,7 @@
             Controls.Add(label1);
             Name = "FormAjouterCategorie";
             Text = "FormAjouterCategorie";
+            FormClosing += FormAjouterCategorie_FormClosing;
             ((System.ComponentModel.ISupportInitialize)nudBudgetCategorie).EndInit();
             ResumeLayout(false);
             PerformLayout();

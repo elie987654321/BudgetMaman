@@ -1,4 +1,14 @@
-test unitaire modifier budget
-3montant restant negatif en rouge et enlever le -
-2-Mettre catégories par ordre alphabétique
-2-faire que l'ajout quand on change de categorie le message est effacer dans l'interface
+3 test unitaire modifier budget
+2 corriger francais -
+1 modification en cas d'erreur
+1 validation quand suppression de categorie
+
+2 il doit y avoir un feedback quand on essaie d'ajouter(ou de modifier) une categories pour laquel le budget est de 0
+    ET il doit y avoir un feedback quand on essai d'ajouter ou de modifier une categorie sans nom
+3 remplir les range du datagridview en utilisant les indices de colonnes stockés dans les variables
+
+3 tester le type de depense dans le test unitaire de depense
+
+3 mettre les noms de fonctions en majuscule
+
+3 mettre label dans un fichier de variable
