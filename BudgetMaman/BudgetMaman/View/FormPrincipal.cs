@@ -27,6 +27,11 @@ namespace BudgetMaman
             mettreCellMontantRestantRouge();
         }
 
+        public void InitLanguage()
+        { 
+            lblErreur = 
+        }
+
         public void sortDgvCategorie()
         {
             DataGridViewColumn colonne = dgvCategories.Columns[indiceColonneNom];
@@ -183,19 +188,19 @@ namespace BudgetMaman
 
             dgvCategories.Rows[indiceRow].Cells[indiceColonneMontantDepenser].ReadOnly = false;
         }
-        
+
 
         private int FindRowIdCategorie(int idCategorie)
         {
             int indiceRow = -1;
             bool trouve = false;
 
-            while(indiceRow < dgvCategories.RowCount && trouve == false)
+            while (indiceRow < dgvCategories.RowCount && trouve == false)
             {
 
                 int idCategorieRow = int.Parse(dgvCategories.Rows[indiceRow].Cells[indiceColonneCacheIdCategorie].Value.ToString());
                 if (idCategorieRow == idCategorie)
-                {  
+                {
                 }
                 indiceRow++;
             }
@@ -298,13 +303,25 @@ namespace BudgetMaman
             DataGridViewCell cellMontant = row.Cells[indiceColonneMontantDepenser];
             DataGridViewCell cellIdCategorie = row.Cells[indiceColonneCacheIdCategorie];
 
-            decimal montant  = decimal.Parse(cellMontant.Value.ToString());
+            decimal montant = decimal.Parse(cellMontant.Value.ToString());
             int idCategorie = int.Parse(cellIdCategorie.Value.ToString());
-        
+
             presenter.ModifierDerniereDepense(montant, idCategorie);
             modifierRowCategorie(presenter.getAllCategories()[idCategorie]);
         }
 
+        private void btnAnnuler_Click(object sender, EventArgs e)
+        {
+            presenter.DeleteDerniereDepense();
+            resetDatagridView();
+        }
 
+        private void FormPrincipal_Resize(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Normal)
+            {
+                dgvCategories.Anchor = AnchorStyles.Right;
+            }
+        }
     }
 }

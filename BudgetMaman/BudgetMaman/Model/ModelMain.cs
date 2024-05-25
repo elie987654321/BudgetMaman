@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using BudgetMaman.Model;
@@ -100,8 +101,26 @@ namespace BudgetMaman.Model
 
 
             }
-        } 
-         
+        }
+
+        public void DeleteDerniereDepense()
+        {
+            if (listPeriode.Count > 0)
+            {
+                
+
+                Periode lastPeriode = listPeriode.Last();
+                if (lastPeriode.ListDepense.Count > 0)
+                {
+                    int idCategorie = lastPeriode.ListDepense.Last().CategorieID;
+                    dictCategorie[idCategorie].CurrentMontant += lastPeriode.ListDepense.Last().Montant;
+
+                    lastPeriode.ListDepense.RemoveAt(lastPeriode.ListDepense.Count - 1);
+                    save();
+                }
+
+            }
+        }
 
         public void addPeriode(Periode periode)
         {

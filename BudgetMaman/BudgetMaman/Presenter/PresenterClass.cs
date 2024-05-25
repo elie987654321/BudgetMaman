@@ -243,7 +243,10 @@ namespace BudgetMaman.Presenter
             modelMain.modifierDerniereDepense(montant, idCategorie);
         }
 
-        
+        public void DeleteDerniereDepense()
+        {
+            modelMain.DeleteDerniereDepense();
+        }
 
         public void save()
         {

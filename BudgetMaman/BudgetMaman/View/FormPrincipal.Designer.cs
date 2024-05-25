@@ -32,7 +32,8 @@
             nUDDepense = new NumericUpDown();
             btnNouveauMois = new Button();
             btnAjouterDepense = new Button();
-            groupBox1 = new GroupBox();
+            gbAjouterDepense = new GroupBox();
+            btnAnnuler = new Button();
             rTxtMessage = new RichTextBox();
             label3 = new Label();
             label2 = new Label();
@@ -45,19 +46,20 @@
             lblDebutPeriode = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvCategories).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nUDDepense).BeginInit();
-            groupBox1.SuspendLayout();
+            gbAjouterDepense.SuspendLayout();
             SuspendLayout();
             // 
             // dgvCategories
             // 
             dgvCategories.AllowUserToAddRows = false;
             dgvCategories.AllowUserToDeleteRows = false;
+            dgvCategories.Anchor = AnchorStyles.None;
             dgvCategories.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvCategories.Location = new Point(455, 99);
+            dgvCategories.Location = new Point(421, 88);
             dgvCategories.Name = "dgvCategories";
             dgvCategories.RowHeadersWidth = 51;
             dgvCategories.RowTemplate.Height = 29;
-            dgvCategories.Size = new Size(408, 331);
+            dgvCategories.Size = new Size(423, 303);
             dgvCategories.TabIndex = 9;
             dgvCategories.CellEndEdit += dgvCategories_CellEndEdit;
             // 
@@ -71,7 +73,7 @@
             // 
             // btnNouveauMois
             // 
-            btnNouveauMois.Location = new Point(91, 219);
+            btnNouveauMois.Location = new Point(120, 199);
             btnNouveauMois.Name = "btnNouveauMois";
             btnNouveauMois.Size = new Size(197, 43);
             btnNouveauMois.TabIndex = 3;
@@ -81,7 +83,7 @@
             // 
             // btnAjouterDepense
             // 
-            btnAjouterDepense.Location = new Point(246, 133);
+            btnAjouterDepense.Location = new Point(246, 162);
             btnAjouterDepense.Name = "btnAjouterDepense";
             btnAjouterDepense.Size = new Size(97, 40);
             btnAjouterDepense.TabIndex = 8;
@@ -89,21 +91,32 @@
             btnAjouterDepense.UseVisualStyleBackColor = true;
             btnAjouterDepense.Click += btnAjouterDepense_Click;
             // 
-            // groupBox1
+            // gbAjouterDepense
             // 
-            groupBox1.Controls.Add(rTxtMessage);
-            groupBox1.Controls.Add(label3);
-            groupBox1.Controls.Add(label2);
-            groupBox1.Controls.Add(label1);
-            groupBox1.Controls.Add(txtNom);
-            groupBox1.Controls.Add(nUDDepense);
-            groupBox1.Controls.Add(btnAjouterDepense);
-            groupBox1.Location = new Point(11, 267);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(363, 259);
-            groupBox1.TabIndex = 6;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "Ajouter une depense";
+            gbAjouterDepense.Controls.Add(btnAnnuler);
+            gbAjouterDepense.Controls.Add(rTxtMessage);
+            gbAjouterDepense.Controls.Add(label3);
+            gbAjouterDepense.Controls.Add(label2);
+            gbAjouterDepense.Controls.Add(label1);
+            gbAjouterDepense.Controls.Add(txtNom);
+            gbAjouterDepense.Controls.Add(nUDDepense);
+            gbAjouterDepense.Controls.Add(btnAjouterDepense);
+            gbAjouterDepense.Location = new Point(28, 267);
+            gbAjouterDepense.Name = "gbAjouterDepense";
+            gbAjouterDepense.Size = new Size(363, 237);
+            gbAjouterDepense.TabIndex = 6;
+            gbAjouterDepense.TabStop = false;
+            gbAjouterDepense.Text = "Ajouter une depense";
+            // 
+            // btnAnnuler
+            // 
+            btnAnnuler.Location = new Point(246, 108);
+            btnAnnuler.Name = "btnAnnuler";
+            btnAnnuler.Size = new Size(97, 38);
+            btnAnnuler.TabIndex = 13;
+            btnAnnuler.Text = "Annuler";
+            btnAnnuler.UseVisualStyleBackColor = true;
+            btnAnnuler.Click += btnAnnuler_Click;
             // 
             // rTxtMessage
             // 
@@ -151,14 +164,14 @@
             // 
             lblErreur.AutoSize = true;
             lblErreur.ForeColor = Color.Crimson;
-            lblErreur.Location = new Point(400, 439);
+            lblErreur.Location = new Point(506, 453);
             lblErreur.Name = "lblErreur";
             lblErreur.Size = new Size(0, 20);
             lblErreur.TabIndex = 14;
             // 
             // btnAjouterCategories
             // 
-            btnAjouterCategories.Location = new Point(91, 29);
+            btnAjouterCategories.Location = new Point(120, 138);
             btnAjouterCategories.Name = "btnAjouterCategories";
             btnAjouterCategories.Size = new Size(197, 44);
             btnAjouterCategories.TabIndex = 1;
@@ -168,7 +181,7 @@
             // 
             // btnSupprimerCategorie
             // 
-            btnSupprimerCategorie.Location = new Point(91, 80);
+            btnSupprimerCategorie.Location = new Point(120, 38);
             btnSupprimerCategorie.Name = "btnSupprimerCategorie";
             btnSupprimerCategorie.Size = new Size(197, 44);
             btnSupprimerCategorie.TabIndex = 2;
@@ -178,7 +191,7 @@
             // 
             // btnModifierCategorie
             // 
-            btnModifierCategorie.Location = new Point(91, 131);
+            btnModifierCategorie.Location = new Point(120, 88);
             btnModifierCategorie.Name = "btnModifierCategorie";
             btnModifierCategorie.Size = new Size(197, 44);
             btnModifierCategorie.TabIndex = 15;
@@ -189,7 +202,7 @@
             // lblDebutPeriode
             // 
             lblDebutPeriode.AutoSize = true;
-            lblDebutPeriode.Location = new Point(455, 53);
+            lblDebutPeriode.Location = new Point(506, 41);
             lblDebutPeriode.Name = "lblDebutPeriode";
             lblDebutPeriode.Size = new Size(0, 20);
             lblDebutPeriode.TabIndex = 16;
@@ -198,21 +211,22 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(971, 537);
-            Controls.Add(lblDebutPeriode);
-            Controls.Add(btnModifierCategorie);
-            Controls.Add(lblErreur);
-            Controls.Add(btnSupprimerCategorie);
-            Controls.Add(btnAjouterCategories);
+            ClientSize = new Size(885, 537);
+            Controls.Add(gbAjouterDepense);
             Controls.Add(btnNouveauMois);
+            Controls.Add(btnModifierCategorie);
+            Controls.Add(btnAjouterCategories);
+            Controls.Add(lblDebutPeriode);
+            Controls.Add(btnSupprimerCategorie);
+            Controls.Add(lblErreur);
             Controls.Add(dgvCategories);
-            Controls.Add(groupBox1);
             Name = "FormPrincipal";
             Text = "Form1";
+            Resize += FormPrincipal_Resize;
             ((System.ComponentModel.ISupportInitialize)dgvCategories).EndInit();
             ((System.ComponentModel.ISupportInitialize)nUDDepense).EndInit();
-            groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
+            gbAjouterDepense.ResumeLayout(false);
+            gbAjouterDepense.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -223,7 +237,7 @@
         private NumericUpDown nUDDepense;
         private Button btnNouveauMois;
         private Button btnAjouterDepense;
-        private GroupBox groupBox1;
+        private GroupBox gbAjouterDepense;
         private Button btnAjouterCategories;
         private Button btnSupprimerCategorie;
         private TextBox txtNom;
@@ -234,5 +248,6 @@
         private Label lblErreur;
         private Button btnModifierCategorie;
         private Label lblDebutPeriode;
+        private Button btnAnnuler;
     }
 }

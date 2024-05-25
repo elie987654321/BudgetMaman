@@ -85,6 +85,7 @@ namespace TestProject
         [Test]
         public void testModifierDerniereDepense()
         {
+            modelManager.resetListRam();
 
             Depense depense1Periode1 = new Depense("depense1periode1", "test", 200, 0, DateTime.Now);
             Depense depense1Periode2 = new Depense("depense1periode2", "test", 200, 1, DateTime.Now);
@@ -92,6 +93,13 @@ namespace TestProject
 
             List<Depense> listDepense1 = new List<Depense>();
             List<Depense> listDepense2 = new List<Depense>();
+
+
+
+            Categorie categorie = new Categorie("test",100, 100);
+
+            modelManager.addCategorie(categorie);
+
 
             listDepense1.Add(depense1Periode1);
 
@@ -106,8 +114,7 @@ namespace TestProject
             modelMain.addPeriode(periode1);
             modelMain.addPeriode(periode2);
 
-
-            modelMain.modifierDerniereDepense(666);
+            modelMain.modifierDerniereDepense(666, modelManager.getAllCategories().Keys.First());
             Assert.That(modelMain.getCurrentPeriode().ListDepense.First().Montant , Is.EqualTo(200));
             Assert.That(modelMain.getCurrentPeriode().ListDepense.Last().Montant, Is.EqualTo(666));
 
