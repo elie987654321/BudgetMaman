@@ -93,13 +93,13 @@ namespace TestProject
         {
             JsonManager jsonManager = new JsonManager();
 
-            jsonManager.resetIdNextCategorie();
+            jsonManager.ResetIdNextCategorie();
 
-            int id1 = jsonManager.getNextIdCategorie();
+            int id1 = jsonManager.GetNextIdCategorie();
             Assert.That(id1, Is.EqualTo(0));
 
 
-            int id2 = jsonManager.getNextIdCategorie();
+            int id2 = jsonManager.GetNextIdCategorie();
             Assert.That(id2, Is.EqualTo(1));
 
         }

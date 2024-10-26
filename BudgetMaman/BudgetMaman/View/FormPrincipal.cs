@@ -1,6 +1,7 @@
 using BudgetMaman.View;
 using BudgetMaman.View.ClassesView;
 using BudgetMaman.View.InterfaceView;
+using Dev;
 using System.ComponentModel;
 
 namespace BudgetMaman
@@ -21,15 +22,24 @@ namespace BudgetMaman
             InitializeComponent();
             this.presenter = presenter;
 
+            this.WindowState = FormWindowState.Maximized;
+
             setLabelDebutPeriode();
             fillDgvCategories();
             sortDgvCategorie();
             mettreCellMontantRestantRouge();
+            SetChainesFrancais();
         }
 
-        public void InitLanguage()
-        { 
-            lblErreur = 
+        public void SetChainesFrancais()
+        {
+            lblDebutPeriode.Text = Langue.FormPrincipal.getDebutLblDateDebutPeriode();
+            btnAjouterDepense.Text = Langue.FormPrincipal.getBtnAjouter();
+            btnAjouterCategories.Text = Langue.FormPrincipal.getBtnAjouterCategorie();
+            btnAnnuler.Text = Langue.FormPrincipal.getBtnAnnuler();
+            btnNouveauMois.Text = Langue.FormPrincipal.getBtnNouvellePeriode();
+            btnSupprimerCategorie.Text = Langue.FormPrincipal.getBtnSupprimerCategorie();
+            btnModifierCategorie.Text = Langue.FormPrincipal.getBtnModifierCategorie();
         }
 
         public void sortDgvCategorie()
@@ -40,14 +50,14 @@ namespace BudgetMaman
 
         public void setLabelDebutPeriode()
         {
-            PeriodeView? periode = presenter.getCurrentPeriode();
+            PeriodeView? periode = presenter.GetCurrentPeriode();
             if (periode != null)
             {
                 int jour = periode.Date.Day;
                 string mois = periode.MoisEnumerateur.ToString();
                 int annee = periode.Date.Year;
 
-                string dateFormatee = $"Debut de la periode : {jour} {mois} {annee}";
+                string dateFormatee = $"{Langue.FormPrincipal.getDebutLblDateDebutPeriode} : {jour} {mois} {annee}";
                 lblDebutPeriode.Text = dateFormatee;
             }
         }
@@ -75,7 +85,7 @@ namespace BudgetMaman
 
             dgvCategories.ColumnCount = 5;
 
-            Dictionary<int, CategorieView> dictCategories = presenter.getAllCategories();
+            Dictionary<int, CategorieView> dictCategories = presenter.GetAllCategories();
 
             foreach (KeyValuePair<int, CategorieView> c in dictCategories)
             {
@@ -85,10 +95,10 @@ namespace BudgetMaman
             dgvCategories.Columns[indiceColonneCacheIdCategorie].Visible = false;
             dgvCategories.Columns[indiceColonneCacheIdCategorie].Width = 0;
 
-            dgvCategories.Columns[indiceColonneNom].HeaderText = "Nom";
-            dgvCategories.Columns[indiceColonneBudget].HeaderText = "Budget";
-            dgvCategories.Columns[indiceColonneMontantDepenser].HeaderText = "Montant dépenser";
-            dgvCategories.Columns[indiceColonneMontantRestant].HeaderText = "Montant restant";
+            dgvCategories.Columns[indiceColonneNom].HeaderText = Langue.FormPrincipal.getColonneNom();
+            dgvCategories.Columns[indiceColonneBudget].HeaderText = Langue.FormPrincipal.getColonneBudget();
+            dgvCategories.Columns[indiceColonneMontantDepenser].HeaderText = Langue.FormPrincipal.getColonneMontantDepenser();
+            dgvCategories.Columns[indiceColonneMontantRestant].HeaderText = Langue.FormPrincipal.getColonneMontantRestant();
 
 
             dgvCategories.Columns[indiceColonneNom].ReadOnly = true;
@@ -106,7 +116,7 @@ namespace BudgetMaman
         {
             dgvCategories.Rows.Clear();
 
-            Dictionary<int, CategorieView> dictCategories = presenter.getAllCategories();
+            Dictionary<int, CategorieView> dictCategories = presenter.GetAllCategories();
 
             foreach (KeyValuePair<int, CategorieView> c in dictCategories)
             {
@@ -130,7 +140,7 @@ namespace BudgetMaman
 
             mois.ListDepense = listDepenseView;
 
-            presenter.addPeriode(mois);
+            presenter.AddPeriode(mois);
 
             resetDatagridView();
             fillDgvCategories();
@@ -143,7 +153,7 @@ namespace BudgetMaman
             {
                 int idCategorieASupprimer = int.Parse(dgvCategories.SelectedCells[indiceColonneCacheIdCategorie].Value.ToString());
 
-                presenter.deleteCategorie(idCategorieASupprimer);
+                presenter.DeleteCategorie(idCategorieASupprimer);
                 dgvCategories.Rows.RemoveAt(dgvCategories.SelectedRows[0].Index);
             }
         }
@@ -157,7 +167,7 @@ namespace BudgetMaman
                 DepenseView depense = new DepenseView(txtNom.Text, rTxtMessage.Text, nUDDepense.Value,
                         idCategorie, DateTime.Now);
 
-                presenter.addDepense(idCategorie, depense);
+                presenter.AddDepense(idCategorie, depense);
 
 
                 setRowCategorieCurrentMontant(idCategorie, int.Parse(nUDDepense.Value.ToString()));
@@ -167,19 +177,19 @@ namespace BudgetMaman
                 rTxtMessage.Text = "";
                 nUDDepense.Value = 0;
 
-                SetOnlyEditableCell(dgvCategories.SelectedRows[0].Index);
+                SetWichCellEditable(dgvCategories.SelectedRows[0].Index);
             }
             else if (dgvCategories.RowCount == 0)
             {
-                lblErreur.Text = "Veuillez créer une categorie";
+                lblErreur.Text = Langue.FormPrincipal.getLblErreurVeuillerCreerCategorie();
             }
             else
             {
-                lblErreur.Text = "Veuillez entrer toutes les informations";
+                lblErreur.Text = Langue.FormPrincipal.getLblErreurVeuillezEntrerInformationFrancais();
             }
         }
 
-        private void SetOnlyEditableCell(int indiceRow)
+        private void SetWichCellEditable(int indiceRow)
         {
             for (int i = 0; i < dgvCategories.Rows.Count; i++)
             {
@@ -271,7 +281,7 @@ namespace BudgetMaman
             {
                 int idCategorieAModifier = int.Parse(dgvCategories.SelectedRows[0].Cells[indiceColonneCacheIdCategorie].Value.ToString());
 
-                Dictionary<int, CategorieView> dictCategorie = presenter.getAllCategories();
+                Dictionary<int, CategorieView> dictCategorie = presenter.GetAllCategories();
 
                 CategorieView categorie = dictCategorie[idCategorieAModifier];
 
@@ -283,7 +293,7 @@ namespace BudgetMaman
             }
             else
             {
-                MessageBox.Show("Vous devez avoir des catégories pour modifier une categorie");
+                MessageBox.Show(Langue.FormPrincipal.getPopupDoitAvoirCategoriePourModifier());
             }
         }
 
@@ -307,7 +317,7 @@ namespace BudgetMaman
             int idCategorie = int.Parse(cellIdCategorie.Value.ToString());
 
             presenter.ModifierDerniereDepense(montant, idCategorie);
-            modifierRowCategorie(presenter.getAllCategories()[idCategorie]);
+            modifierRowCategorie(presenter.GetAllCategories()[idCategorie]);
         }
 
         private void btnAnnuler_Click(object sender, EventArgs e)

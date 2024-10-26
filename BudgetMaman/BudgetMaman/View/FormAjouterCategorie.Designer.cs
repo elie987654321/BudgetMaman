@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
-            label2 = new Label();
+            lblNom = new Label();
+            lblBudget = new Label();
             btnAjouterCategorie = new Button();
             btnAnnuler = new Button();
             txtNom = new TextBox();
@@ -37,23 +37,23 @@
             ((System.ComponentModel.ISupportInitialize)nudBudgetCategorie).BeginInit();
             SuspendLayout();
             // 
-            // label1
+            // lblNom
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(20, 27);
-            label1.Name = "label1";
-            label1.Size = new Size(42, 20);
-            label1.TabIndex = 0;
-            label1.Text = "Nom";
+            lblNom.AutoSize = true;
+            lblNom.Location = new Point(20, 27);
+            lblNom.Name = "lblNom";
+            lblNom.Size = new Size(42, 20);
+            lblNom.TabIndex = 0;
+            lblNom.Text = "Nom";
             // 
-            // label2
+            // lblBudget
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(20, 117);
-            label2.Name = "label2";
-            label2.Size = new Size(57, 20);
-            label2.TabIndex = 1;
-            label2.Text = "Budget";
+            lblBudget.AutoSize = true;
+            lblBudget.Location = new Point(20, 117);
+            lblBudget.Name = "lblBudget";
+            lblBudget.Size = new Size(57, 20);
+            lblBudget.TabIndex = 1;
+            lblBudget.Text = "Budget";
             // 
             // btnAjouterCategorie
             // 
@@ -99,8 +99,8 @@
             Controls.Add(txtNom);
             Controls.Add(btnAnnuler);
             Controls.Add(btnAjouterCategorie);
-            Controls.Add(label2);
-            Controls.Add(label1);
+            Controls.Add(lblBudget);
+            Controls.Add(lblNom);
             Name = "FormAjouterCategorie";
             Text = "FormAjouterCategorie";
             FormClosing += FormAjouterCategorie_FormClosing;
@@ -111,8 +111,8 @@
 
         #endregion
 
-        private Label label1;
-        private Label label2;
+        private Label lblNom;
+        private Label lblBudget;
         private Button btnAjouterCategorie;
         private Button btnAnnuler;
         private TextBox txtNom;

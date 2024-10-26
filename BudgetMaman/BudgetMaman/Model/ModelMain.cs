@@ -43,12 +43,12 @@ namespace BudgetMaman.Model
             return dictCategorie;
         }
 
-        public List<Periode> getAllPeriodes()
+        public List<Periode> GetAllPeriodes()
         {
             return listPeriode;
         }
 
-        public Periode? getCurrentPeriode()
+        public Periode? GetCurrentPeriode()
         {
             if (listPeriode.Count > 0)
             {
@@ -61,27 +61,27 @@ namespace BudgetMaman.Model
         }
 
 
-        public int addCategorie(Categorie categorie)
+        public int AddCategorie(Categorie categorie)
         {
-            int idCategorie = jsonManager.getNextIdCategorie();
+            int idCategorie = jsonManager.GetNextIdCategorie();
 
             dictCategorie.Add(idCategorie, categorie);
-            save();
+            Save();
 
             return idCategorie;
         }
 
-        public void addDepense(Depense depense, int idCategorie)
+        public void AddDepense(Depense depense, int idCategorie)
         {
             Periode mois = listPeriode[listPeriode.Count - 1];
 
             mois.ListDepense.Add(depense);
 
             dictCategorie[idCategorie].CurrentMontant -= depense.Montant;
-            save();
+            Save();
         }
 
-        public void modifierDerniereDepense(decimal montant, int idCategorie)
+        public void ModifierDerniereDepense(decimal montant, int idCategorie)
         {
             if (listPeriode.Count > 0)
             {
@@ -96,7 +96,7 @@ namespace BudgetMaman.Model
 
                     dictCategorie[idCategorie].CurrentMontant -= montant;
 
-                    save();
+                    Save();
                 }
 
 
@@ -116,28 +116,28 @@ namespace BudgetMaman.Model
                     dictCategorie[idCategorie].CurrentMontant += lastPeriode.ListDepense.Last().Montant;
 
                     lastPeriode.ListDepense.RemoveAt(lastPeriode.ListDepense.Count - 1);
-                    save();
+                    Save();
                 }
 
             }
         }
 
-        public void addPeriode(Periode periode)
+        public void AddPeriode(Periode periode)
         {
             listPeriode.Add(periode);
             foreach(Categorie c in dictCategorie.Values)
             {
-                c.resetCurrentMontant();
+                c.ResetCurrentMontant();
             }
-            save();
+            Save();
         }
 
-        public void modifierCategorie(int idCategorie, Categorie categorie)
+        public void ModifierCategorie(int idCategorie, Categorie categorie)
         {
             if (dictCategorie.ContainsKey(idCategorie))
             { 
                 dictCategorie[idCategorie] = categorie;
-                save();
+                Save();
             }
             else
             {
@@ -146,28 +146,28 @@ namespace BudgetMaman.Model
         }
 
 
-        public void deleteCategorie(int idCategorie)
+        public void DeleteCategorie(int idCategorie)
         {
             dictCategorie.Remove(idCategorie);
-            save();
+            Save();
         }
 
-        public void resetMontantCategories()
+        public void ResetMontantCategories()
         {
             foreach (Categorie c in dictCategorie.Values)
             {
-                c.resetCurrentMontant();
+                c.ResetCurrentMontant();
             }
         }
 
-        public void save()
+        public void Save()
         {
             jsonManager.SaveCategories(dictCategorie);
             jsonManager.SavePeriode(listPeriode);
         }
 
         //Pour les tests
-        public void resetListRam()
+        public void ResetListRam()
         {
             dictCategorie = new Dictionary<int, Categorie>();
             listPeriode = new List<Periode>();

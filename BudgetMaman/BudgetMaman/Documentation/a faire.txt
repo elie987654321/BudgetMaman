@@ -1,8 +1,8 @@
 3 test unitaire modifier budget
 3 test unitaire deleteDerniereDepense
-2 corriger francais -
+2 corriger francais
 1 rendre la taille du formulaie dynamique
-1 validation quand supprime categorie
+1 validation quand supprime categorie : ok ? verifier
 
 
 2 il doit y avoir un feedback quand on essaie d'ajouter(ou de modifier) une categories pour laquel le budget est de 0

@@ -10,11 +10,6 @@ namespace BudgetMaman.Model
 {
     public class Depense
     {
-        
-
-
-        [JsonIgnore]
-        private Categorie categorie;
 
         public Depense(string nom, string message, decimal montant, int categorieID, DateTime date)
         {
@@ -33,10 +28,6 @@ namespace BudgetMaman.Model
         public DateTime Date { get; set; }
         public int CategorieID { get; set; }
 
-        public void setCategorieByRef(ref Categorie? categorie)
-        {
-            this.categorie = categorie;
-        }
 
         public enum TypeDepense
         {

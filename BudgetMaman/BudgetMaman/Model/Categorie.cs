@@ -21,7 +21,7 @@ namespace BudgetMaman.Model
             this.CurrentMontant = currentMontant;
         }
 
-        public void resetCurrentMontant()
+        public void ResetCurrentMontant()
         {
             this.CurrentMontant = MontantDebut;
         }

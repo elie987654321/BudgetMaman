@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.DirectoryServices;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
@@ -95,7 +96,7 @@ namespace BudgetMaman.Model
         }
 
 
-        public int getNextIdCategorie()
+        public int GetNextIdCategorie()
         {
             int id;
 
@@ -115,21 +116,23 @@ namespace BudgetMaman.Model
         }
 
         //Pour les tests
-        public void resetIdNextCategorie()
+        public void ResetIdNextCategorie()
         {
             File.Delete(pathNextIdCategorie);
         }
 
-        public void assignCategorieToDepense(Dictionary<int, Categorie> dictCategorie, List<Depense> listDepense)
+        //TODO Pas sur pourquoi j'ai fait ceci, deleter si trouve pas de raison
+        /*
+        public void AssignCategorieToDepense(Dictionary<int, Categorie> dictCategorie, List<Depense> listDepense)
         {
             foreach (Depense d in listDepense)
             {
                 if (dictCategorie.ContainsKey(d.CategorieID))
                 {
                     Categorie categorie = dictCategorie.GetValueOrDefault(d.CategorieID);
-                    d.setCategorieByRef(ref categorie); 
+                    d.SetCategorieByRef(ref categorie); 
                 }
             }
-        }
+        }*/
     }
 }

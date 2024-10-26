@@ -13,7 +13,7 @@ namespace BudgetMaman.Presenter
             modelMain = new ModelMain();
         }
 
-        public Dictionary<int, CategorieView> getAllCategories()
+        public Dictionary<int, CategorieView> GetAllCategories()
         {
             Dictionary<int,Categorie> dictCategorieModel = modelMain.getAllCategories();
             Dictionary<int, CategorieView> dictCategorieView = new Dictionary<int, CategorieView>();
@@ -27,9 +27,9 @@ namespace BudgetMaman.Presenter
             return dictCategorieView;
         }
 
-        public List<PeriodeView> getAllMois()
+        public List<PeriodeView> GetAllMois()
         {
-            List<Periode> listMoisModel = modelMain.getAllPeriodes();
+            List<Periode> listMoisModel = modelMain.GetAllPeriodes();
             List<PeriodeView> listMoisView = new List<PeriodeView>();
 
             foreach (Periode mModel in listMoisModel)
@@ -38,33 +38,33 @@ namespace BudgetMaman.Presenter
                 List<DepenseView> listDepenseView = new List<DepenseView>();
                 foreach (Depense dModel in mModel.ListDepense)
                 {
-                    DepenseView dView = depenseModelToView(dModel);
+                    DepenseView dView = DepenseModelToView(dModel);
                 }
 
-                PeriodeView moisView = new PeriodeView(listDepenseView, enumMoisModelToView(mModel.MoisEnumerateur), mModel.Date); // Replace 
+                PeriodeView moisView = new PeriodeView(listDepenseView, EnumMoisModelToView(mModel.MoisEnumerateur), mModel.Date); // Replace 
                 listMoisView.Add(moisView);
             }
 
             return listMoisView;
         }
 
-        public void addPeriode(PeriodeView periodeView)
+        public void AddPeriode(PeriodeView periodeView)
         {
             List<Depense> listDepenseModel = new List<Depense>();
 
             foreach (DepenseView depenseView in periodeView.ListDepense)
             {
-                listDepenseModel.Add(depenseViewToModel(depenseView));
+                listDepenseModel.Add(DepenseViewToModel(depenseView));
             }
 
-            Periode periodeModel = new Periode(listDepenseModel, moisEnumViewToModel(periodeView.MoisEnumerateur), periodeView.Date);
-            modelMain.addPeriode(periodeModel);
+            Periode periodeModel = new Periode(listDepenseModel, MoisEnumViewToModel(periodeView.MoisEnumerateur), periodeView.Date);
+            modelMain.AddPeriode(periodeModel);
         }
 
-        public void deleteCategorie(int idCategorie)
+        public void DeleteCategorie(int idCategorie)
         {
-            modelMain.deleteCategorie(idCategorie);
-            modelMain.save();
+            modelMain.DeleteCategorie(idCategorie);
+            modelMain.Save();
         }
 
         private PeriodeView PeriodeModelToView(Periode moisModel)
@@ -74,20 +74,20 @@ namespace BudgetMaman.Presenter
 
             foreach(Depense depenseModel in moisModel.ListDepense)
             {
-                listDepenseView.Add(depenseModelToView(depenseModel));
+                listDepenseView.Add(DepenseModelToView(depenseModel));
             }
 
-            PeriodeView moisView = new (listDepenseView, enumMoisModelToView(moisModel.MoisEnumerateur), moisModel.Date );
+            PeriodeView moisView = new (listDepenseView, EnumMoisModelToView(moisModel.MoisEnumerateur), moisModel.Date );
             return moisView;
         }
 
-        public DepenseView depenseModelToView(Depense dModel)
+        public DepenseView DepenseModelToView(Depense dModel)
         {
             DepenseView dView = new DepenseView(dModel.Nom, dModel.Message, dModel.Montant, dModel.CategorieID, dModel.Date);
             return dView;
         }
 
-        private PeriodeView.MoisEnumView enumMoisModelToView(Periode.MoisEnum moisEnum)
+        private PeriodeView.MoisEnumView EnumMoisModelToView(Periode.MoisEnum moisEnum)
         {
             PeriodeView.MoisEnumView moisEnumView;
 
@@ -135,7 +135,7 @@ namespace BudgetMaman.Presenter
             return moisEnumView;
         }
 
-        private Periode.MoisEnum moisEnumViewToModel(PeriodeView.MoisEnumView moisEnumView)
+        private Periode.MoisEnum MoisEnumViewToModel(PeriodeView.MoisEnumView moisEnumView)
         {
             Periode.MoisEnum moisEnumModel;
 
@@ -186,39 +186,39 @@ namespace BudgetMaman.Presenter
             return moisEnumModel;
         }
 
-        public int addCategorie(CategorieView categorieView)
+        public int AddCategorie(CategorieView categorieView)
         {
-            Categorie categorieModel = categoriesViewToModel(categorieView);
-            return modelMain.addCategorie(categorieModel);
+            Categorie categorieModel = CategoriesViewToModel(categorieView);
+            return modelMain.AddCategorie(categorieModel);
         }
 
-        public void modifierCategorie(int idCategorie, CategorieView categorieView)
+        public void ModifierCategorie(int idCategorie, CategorieView categorieView)
         {
-            Categorie categorie = categoriesViewToModel(categorieView);
-            modelMain.modifierCategorie(idCategorie ,categorie);
+            Categorie categorie = CategoriesViewToModel(categorieView);
+            modelMain.ModifierCategorie(idCategorie ,categorie);
         }
 
-        public PeriodeView getCurrentPeriode()
+        public PeriodeView GetCurrentPeriode()
         {
-            Periode? periodeModel = (modelMain.getCurrentPeriode());
+            Periode? periodeModel = (modelMain.GetCurrentPeriode());
 
             PeriodeView periodeView = PeriodeModelToView(periodeModel);
             return periodeView;
         }
 
-        public void addDepense(int idCategorie,DepenseView depenseView)
+        public void AddDepense(int idCategorie,DepenseView depenseView)
         {
-            Depense depenseModel = depenseViewToModel(depenseView);
-            modelMain.addDepense(depenseModel, idCategorie);
+            Depense depenseModel = DepenseViewToModel(depenseView);
+            modelMain.AddDepense(depenseModel, idCategorie);
         }
 
-        private Depense depenseViewToModel(DepenseView depenseView)
+        private Depense DepenseViewToModel(DepenseView depenseView)
         {
             Depense depenseModel = new Depense(depenseView.Nom, depenseView.Message, depenseView.Montant, depenseView.Categorie, depenseView.Date);
             return depenseModel;
         }
 
-        private Categorie categoriesViewToModel(CategorieView categorieView)
+        private Categorie CategoriesViewToModel(CategorieView categorieView)
         {
             Categorie categorieModel = new Categorie(
                 categorieView.Nom,
@@ -228,7 +228,7 @@ namespace BudgetMaman.Presenter
             return categorieModel;
         }
 
-        private CategorieView categorieModelToView(Categorie categorieModel)
+        private CategorieView CategorieModelToView(Categorie categorieModel)
         {
             CategorieView categorieView = new CategorieView(
                     categorieModel.Nom,
@@ -240,7 +240,7 @@ namespace BudgetMaman.Presenter
 
         public void ModifierDerniereDepense(decimal montant, int idCategorie)
         {
-            modelMain.modifierDerniereDepense(montant, idCategorie);
+            modelMain.ModifierDerniereDepense(montant, idCategorie);
         }
 
         public void DeleteDerniereDepense()
@@ -248,15 +248,15 @@ namespace BudgetMaman.Presenter
             modelMain.DeleteDerniereDepense();
         }
 
-        public void save()
+        public void Save()
         {
-            modelMain.save();
+            modelMain.Save();
         }
 
         //Pour les tests
-        public void resetListRam()
+        public void ResetListRam()
         {
-            modelMain.resetListRam();
+            modelMain.ResetListRam();
         }
     }
 }

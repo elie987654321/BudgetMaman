@@ -1,14 +1,7 @@
 ﻿using BudgetMaman.View.ClassesView;
 using BudgetMaman.View.InterfaceView;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using Dev;
+
 
 namespace BudgetMaman.View
 {
@@ -30,6 +23,15 @@ namespace BudgetMaman.View
             txtNom.Text = categorieView.Nom;
             nudBudgetCategorie.Value = categorieView.MontantDebut;
             montantDepenser = categorieView.MontantDebut - categorieView.CurrentMontant;
+            SetChainesFrancais();
+        }
+
+        public void SetChainesFrancais()
+        {
+            this.lblNom.Text = Langue.FormModifierCategorie.getLblNom();
+            this.lblBudget.Text = Langue.FormModifierCategorie.getLblBudget();
+            this.btnAnnuler.Text = Langue.FormModifierCategorie.getBtnAnnuler();
+            this.btnModifierCategorie.Text = Langue.FormModifierCategorie.getBtnModifier();
         }
 
 
@@ -38,8 +40,8 @@ namespace BudgetMaman.View
             if (txtNom.Text != "" && nudBudgetCategorie.Value > 0)
             {
                 CategorieView categorieView = new CategorieView(txtNom.Text, nudBudgetCategorie.Value, nudBudgetCategorie.Value - montantDepenser);
-                presenter.modifierCategorie(idCategorie, categorieView);
-                presenter.save();
+                presenter.ModifierCategorie(idCategorie, categorieView);
+                presenter.Save();
 
                 formPrincipal.modifierRowCategorie(categorieView);
                 formPrincipal.Enabled = true;
