@@ -22,13 +22,18 @@ namespace BudgetMaman
             InitializeComponent();
             this.presenter = presenter;
 
-            this.WindowState = FormWindowState.Maximized;
+            this.MinimumSize = new Size(1100, 750);
 
+
+            SetSizes();
             setLabelDebutPeriode();
             fillDgvCategories();
             sortDgvCategorie();
             mettreCellMontantRestantRouge();
             SetChainesFrancais();
+
+
+
         }
 
         public void SetChainesFrancais()
@@ -105,7 +110,6 @@ namespace BudgetMaman
             dgvCategories.Columns[indiceColonneBudget].ReadOnly = true;
             dgvCategories.Columns[indiceColonneMontantDepenser].ReadOnly = true;
             dgvCategories.Columns[indiceColonneMontantRestant].ReadOnly = true;
-
 
 
             dgvCategories.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -328,10 +332,15 @@ namespace BudgetMaman
 
         private void FormPrincipal_Resize(object sender, EventArgs e)
         {
-            if (this.WindowState == FormWindowState.Normal)
-            {
-                dgvCategories.Anchor = AnchorStyles.Right;
-            }
+            SetSizes();
+        }
+
+        private void SetSizes()
+        {
+            dgvCategories.Width = (int)(this.Width / 2.5);
+            dgvCategories.ColumnHeadersHeight = 50;
+
+            tableLayoutBoutons.Width = (int)(this.Width / 2.5);
         }
     }
 }
