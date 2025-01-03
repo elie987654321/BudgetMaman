@@ -1,5 +1,5 @@
 ﻿using BudgetMaman.Model;
-
+using BudgetMaman.Model.Categories;
 
 namespace TestProject
 {

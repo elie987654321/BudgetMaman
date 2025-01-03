@@ -17,3 +17,5 @@ C:\Users\Utilisateur\Documents\GitHub\BudgetMaman\BudgetMamanCSharp\BudgetMaman\
 C:\Users\Utilisateur\Documents\GitHub\BudgetMaman\BudgetMamanCSharp\BudgetMaman\BudgetMaman\BudgetMaman\obj\Debug\net6.0-windows\BudgetMaman.FormPrincipal.resources
 C:\Users\Utilisateur\Documents\GitHub\BudgetMaman\BudgetMamanCSharp\BudgetMaman\BudgetMaman\BudgetMaman\obj\Debug\net6.0-windows\BudgetMaman.View.FormAjouterCategorie.resources
 C:\Users\Utilisateur\Documents\GitHub\BudgetMaman\BudgetMamanCSharp\BudgetMaman\BudgetMaman\BudgetMaman\obj\Debug\net6.0-windows\BudgetMaman.View.FormModifierCategorie.resources
+C:\Users\Utilisateur\Documents\GitHub\BudgetMaman\BudgetMamanCSharp\BudgetMaman\BudgetMaman\BudgetMaman\obj\Debug\net6.0-windows\BudgetMaman.View.FormHistorique.resources
+C:\Users\Utilisateur\Documents\GitHub\BudgetMaman\BudgetMamanCSharp\BudgetMaman\BudgetMaman\BudgetMaman\obj\Debug\net6.0-windows\BudgetMaman.View.FormHistoriqueSelectPeriode.resources

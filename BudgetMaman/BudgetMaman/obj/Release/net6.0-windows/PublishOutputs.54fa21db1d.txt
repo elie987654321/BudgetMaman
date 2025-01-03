@@ -1,0 +1,5 @@
+C:\Users\Utilisateur\Documents\GitHub\BudgetMaman\BudgetMamanCSharp\BudgetMaman\BudgetMaman\BudgetMaman\bin\Release\net6.0-windows\publish\BudgetMaman.exe
+C:\Users\Utilisateur\Documents\GitHub\BudgetMaman\BudgetMamanCSharp\BudgetMaman\BudgetMaman\BudgetMaman\bin\Release\net6.0-windows\publish\BudgetMaman.dll
+C:\Users\Utilisateur\Documents\GitHub\BudgetMaman\BudgetMamanCSharp\BudgetMaman\BudgetMaman\BudgetMaman\bin\Release\net6.0-windows\publish\BudgetMaman.deps.json
+C:\Users\Utilisateur\Documents\GitHub\BudgetMaman\BudgetMamanCSharp\BudgetMaman\BudgetMaman\BudgetMaman\bin\Release\net6.0-windows\publish\BudgetMaman.runtimeconfig.json
+C:\Users\Utilisateur\Documents\GitHub\BudgetMaman\BudgetMamanCSharp\BudgetMaman\BudgetMaman\BudgetMaman\bin\Release\net6.0-windows\publish\BudgetMaman.pdb

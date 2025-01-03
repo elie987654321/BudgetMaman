@@ -5,8 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-
-
+using BudgetMaman.Model.Categories;
 
 namespace BudgetMaman.Model
 {
@@ -74,25 +73,25 @@ namespace BudgetMaman.Model
 
         public List<Periode> LoadPeriode()
         {
-            List<Periode> listMois = new List<Periode>();
+            List<Periode> listPeriodes = new List<Periode>();
 
             if (File.Exists(pathPeriode))
             {
                 string jsonString = File.ReadAllText(pathPeriode);
 
-                listMois = JsonSerializer.Deserialize<List<Periode>>(jsonString);
+                listPeriodes = JsonSerializer.Deserialize<List<Periode>>(jsonString);
 
-                if (listMois == null)
+                if (listPeriodes == null)
                 {
-                    listMois = new List<Periode>();
+                    listPeriodes = new List<Periode>();
                 }
             }
             else
             {
-                listMois = new List<Periode>();
+                listPeriodes = new List<Periode>();
             }
 
-            return listMois;
+            return listPeriodes;
         }
 
 
@@ -102,7 +101,7 @@ namespace BudgetMaman.Model
 
             if (File.Exists(pathNextIdCategorie))
             {
-                string idString = File.ReadAllText(pathNextIdCategorie) ;
+                string idString = File.ReadAllText(pathNextIdCategorie);
                 id = int.Parse(idString);
             }
             else

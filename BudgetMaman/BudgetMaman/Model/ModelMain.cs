@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
-using BudgetMaman.Model;
+using BudgetMaman.Model.Categories;
 using BudgetMaman.View.ClassesView;
 
 namespace BudgetMaman.Model

@@ -1,4 +1,5 @@
 ﻿using BudgetMaman.Model;
+using BudgetMaman.Model.Categories;
 using BudgetMaman.View.ClassesView;
 using BudgetMaman.View.InterfaceView;
 
@@ -15,7 +16,7 @@ namespace BudgetMaman.Presenter
 
         public Dictionary<int, CategorieView> GetAllCategories()
         {
-            Dictionary<int,Categorie> dictCategorieModel = modelMain.getAllCategories();
+            Dictionary<int, Categorie> dictCategorieModel = modelMain.getAllCategories();
             Dictionary<int, CategorieView> dictCategorieView = new Dictionary<int, CategorieView>();
 
             foreach (KeyValuePair<int, Categorie> cModel in dictCategorieModel)
@@ -26,6 +27,21 @@ namespace BudgetMaman.Presenter
 
             return dictCategorieView;
         }
+
+        public List<PeriodeView> GetAllPeriodes()
+        {
+            List<Periode> listPeriodesModel = modelMain.GetAllPeriodes();
+            List<PeriodeView> listPeriodeView = new List<PeriodeView>();
+
+            for (int i = 0; i < listPeriodesModel.Count; i++)
+            {
+                PeriodeView periodeView = PeriodeModelToView(listPeriodesModel.ElementAt<Periode>(i));
+                listPeriodeView.Add(periodeView);
+            }
+
+            return listPeriodeView;
+        }
+
 
         public List<PeriodeView> GetAllMois()
         {

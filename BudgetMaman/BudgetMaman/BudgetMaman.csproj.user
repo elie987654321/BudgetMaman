@@ -7,6 +7,12 @@
     <Compile Update="View\FormAjouterCategorie.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="View\FormHistorique.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="View\FormHistoriqueSelectPeriode.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="View\FormModifierCategorie.cs">
       <SubType>Form</SubType>
     </Compile>
